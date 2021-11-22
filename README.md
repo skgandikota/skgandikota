@@ -8,3 +8,7 @@
 My name is Sai Koushik Gandikota and I love building software powered tools and services. Here, you can find a collection of my work. Some completed ✅ &nbsp;and others in WIP status 🛠
 
 [![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=skgandikota&theme=dark&date_format=j%20M%5B%20Y%5D)](https://git.io/streak-stats)
+
+#### Visitors (since 21 November 2021)
+
+![Counter](https://profile-counter.glitch.me/skgandikota/count.svg)
