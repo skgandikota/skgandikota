@@ -11,4 +11,4 @@ jobs:
             - uses: gautamkrishnar/blog-post-workflow@master
               with: 
                 max_post_count: "4"
-                feed_list: "https://dev.to/feed/https://dev.to/saikoushikg, https://medium.com/feed/@saikoushikg, https://saikoushikg/blog/rss.xml"
+                feed_list: "https://dev.to/feed/saikoushikg, https://medium.com/feed/@saikoushikg, https://saikoushikg/blog/rss.xml"
