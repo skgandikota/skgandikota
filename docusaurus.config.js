@@ -82,18 +82,18 @@ const config = {
           src: 'img/favicon.ico',
         },
         items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'right',
-            label: 'Tutorial',
-          },
-          {to: '/blog', label: 'Blog', position: 'right'},
-          {
-            href: 'https://github.com/skgandikota',
-            label: 'GitHub',
-            position: 'right',
-          },
+          // {
+          //   type: 'docSidebar',
+          //   sidebarId: 'tutorialSidebar',
+          //   position: 'right',
+          //   label: 'Tutorial',
+          // },
+          // {to: '/blog', label: 'Blog', position: 'right'},
+          // {
+          //   href: 'https://github.com/skgandikota',
+          //   label: 'GitHub',
+          //   position: 'right',
+          // },
         ],
       },
       footer: {

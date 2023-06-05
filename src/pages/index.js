@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "scroll",
   },
   image: {
-    backgroundImage: "url(./img/1649731867371.jpeg)",
+    backgroundImage: "url(https://media.licdn.com/dms/image/C5603AQHJVAmukRa58w/profile-displayphoto-shrink_800_800/0/1649731867371?e=2147483647&v=beta&t=semysEleedO3Z-vmvOlh5pvZA1SgNkSL9djL-Z8UVxY)",
     backgroundSize: "cover",
     backgroundPosition: 'center',
     height: "100vh",
@@ -43,9 +43,9 @@ export default function Home() {
               <section id='AboutMe'> 
                <AboutMe/>
               </section>
-              <section id='LanguageAndTools'> 
+              {/* <section id='LanguageAndTools'> 
                 <LangugageAndTools/>
-              </section>
+              </section> */}
             </Paper>
           </Grid>
         </Grid>
