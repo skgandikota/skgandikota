@@ -78,6 +78,11 @@ const config = {
           // },
           // {to: '/blog', label: 'Blog', position: 'right'},
           {
+            href: 'https://myfamily.saikoushikg.in',
+            label: 'My Family Tree',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/skgandikota/skgandikota',
             label: 'GitHub',
             position: 'right',
