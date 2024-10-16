@@ -1,12 +1,13 @@
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  namespace: default
+  name: "sai-gandikota"
   annotations:
-    backstage.io/managed-by-location: file:/Users/a965821/GitHub/upgrade/muziris/examples/org.yaml
-    backstage.io/managed-by-origin-location: file:/Users/a965821/GitHub/upgrade/muziris/examples/org.yaml
-  name: Sai.Gandikota
-
+    tcs.net/job-function: engineering
+    tcs.net/company: Tata Consultancy Services (TCS)
+    tcs.net/github-username: skgandikota
 spec:
-  memberOf:
-    - mnscorp.net
+  profile:
+    displayName: Gandikota, Sai
+    email: sai.gandikota@mnscorp.net
+  memberOf: [guest]
