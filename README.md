@@ -1,38 +1,74 @@
-<h1 align="center">Hi 👋, I'm Sai Koushik Gandikota</h1>
-<h3 align="center">A passionate Full Stack Engineer from India</h3>
-<p align="left"> 
-  <img src="https://komarev.com/ghpvc/?username=skgandikota&label=Profile%20views&color=0e75b6&style=for-the-badge" alt="skgandikota" /> 
-  <a href="https://twitter.com/gskoushik" target="blank"> <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" /> </a> 
-  <a href="https://www.linkedin.com/in/saikoushikgandikota" target="blank"> <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /> </a>
+<div align="center">
 
-</p>
+# Hey, I'm Saikoushik 👋
 
-<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=skgandikota" alt="skgandikota" /></a> </p>
+### Senior Platform Engineer · Azure · Kubernetes · Cloud Security
 
-- 👨‍💻 I’m currently working for [TCS](https://www.tcs.com/)
+[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-saikoushikg.in-6C63FF?style=for-the-badge)](https://saikoushikg.in)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/saikoushikg)
+[![Email](https://img.shields.io/badge/Email-saikoushikg@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:saikoushikg@gmail.com)
 
-### Blogs posts
+</div>
 
-<!-- BLOG-POST-LIST:START -->
-<!-- BLOG-POST-LIST:END -->
+---
 
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://codepen.io/skgandikota" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/codepen.svg" alt="skgandikota" height="30" width="40" /></a>
-<a href="https://dev.to/https://dev.to/saikoushikg" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/devto.svg" alt="https://dev.to/saikoushikg" height="30" width="40" /></a>
-<a href="https://twitter.com/gskoushik" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="gskoushik" height="30" width="40" /></a>
-<a href="https://linkedin.com/in/saikoushikgandikota" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="saikoushikgandikota" height="30" width="40" /></a>
-<a href="https://stackoverflow.com/users/4723353" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/stack-overflow.svg" alt="4723353" height="30" width="40" /></a>
-<a href="https://codesandbox.com/skgandikota" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/codesandbox.svg" alt="skgandikota" height="30" width="40" /></a>
-<a href="https://fb.com/gandikotasaikoushik" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="gandikotasaikoushik" height="30" width="40" /></a>
-<a href="https://instagram.com/gandikotasaikoushik" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="gandikotasaikoushik" height="30" width="40" /></a>
-<a href="https://medium.com/@saikoushikg" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/medium.svg" alt="@saikoushikg" height="30" width="40" /></a>
-<a href="/https://saikoushikg/blog/rss.xml" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/rss.svg" alt="https://saikoushikg/blog/rss.xml" height="30" width="40" /></a>
-</p>
+### 🔧 What I Do
 
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://angular.io" target="_blank" rel="noreferrer"> <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="angular" width="40" height="40"/> </a> <a href="https://angular.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-original-wordmark.svg" alt="angularjs" width="40" height="40"/> </a> <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/> </a> <a href="https://azure.microsoft.com/en-in/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg" alt="azure" width="40" height="40"/> </a> <a href="https://babeljs.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/babeljs/babeljs-icon.svg" alt="babel" width="40" height="40"/> </a> <a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="40" height="40"/> </a> <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> <a href="https://www.cypress.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/6e46ec1fc23b60c8fd0d2f2ff46db82e16dbd75f/icons/cypress.svg" alt="cypress" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://www.elastic.co" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/elastic/elastic-icon.svg" alt="elasticsearch" width="40" height="40"/> </a> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://grafana.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg" alt="grafana" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://gohugo.io/" target="_blank" rel="noreferrer"> <img src="https://api.iconify.design/logos-hugo.svg" alt="hugo" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.jenkins.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg" alt="jenkins" width="40" height="40"/> </a> <a href="https://jestjs.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jestjsio/jestjsio-icon.svg" alt="jest" width="40" height="40"/> </a> <a href="https://kafka.apache.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/apache_kafka/apache_kafka-icon.svg" alt="kafka" width="40" height="40"/> </a> <a href="https://www.elastic.co/kibana" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/elasticco_kibana/elasticco_kibana-icon.svg" alt="kibana" width="40" height="40"/> </a> <a href="https://kubernetes.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/kubernetes/kubernetes-icon.svg" alt="kubernetes" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://www.microsoft.com/en-us/sql-server" target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" alt="mssql" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://nestjs.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nestjs/nestjs-plain.svg" alt="nestjs" width="40" height="40"/> </a> <a href="https://nextjs.org/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/nextjs-2.svg" alt="nextjs" width="40" height="40"/> </a> <a href="https://www.nginx.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg" alt="nginx" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://www.oracle.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/oracle/oracle-original.svg" alt="oracle" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://realm.io/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/bestofjs/bestofjs-webui/8665e8c267a0215f3159df28b33c365198101df5/public/logos/realm.svg" alt="realm" width="40" height="40"/> </a> <a href="https://redis.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg" alt="redis" width="40" height="40"/> </a> <a href="https://sass-lang.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="40" height="40"/> </a> <a href="https://www.selenium.dev" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/detain/svg-logos/780f25886640cef088af994181646db2f6b1a3f8/svg/selenium-logo.svg" alt="selenium" width="40" height="40"/> </a> <a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="40" height="40"/> </a> <a href="https://www.sqlite.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" alt="sqlite" width="40" height="40"/> </a> <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a> </p>
+I help engineering organisations **adopt cloud platforms securely and at scale**. Over 10 years, I've progressed from QA automation → API development → platform engineering — driven by one pattern: seeing what slows teams down and building the tooling to fix it.
 
-<p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=skgandikota&show_icons=true&locale=en&layout=compact" alt="skgandikota" /></p>
+```
+📊 90+ teams enabled on shared platforms
+🚀 400+ applications deployed on AKS
+👥 1,800 engineers using our developer portal
+🔒 Leading cloud security enablement (Private Endpoints, Zero Trust)
+```
 
-<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=skgandikota&show_icons=true&locale=en" alt="skgandikota" /></p>
+### ☁️ Current Focus
+
+- **Platform Enablement** — Internal Developer Platforms, golden paths, self-service infra
+- **Cloud Security** — Private Endpoints, Managed Identity, Azure Policy, network segmentation
+- **IaC at Scale** — Terraform modules adopted across enterprise portfolios
+- **Developer Experience** — Backstage portals, scaffolding templates, CI/CD standardisation
+
+### 🛠️ Tech Stack
+
+<div align="center">
+
+| Cloud & Platform | Containers & Orchestration | IaC & Automation | Security |
+|:---:|:---:|:---:|:---:|
+| Azure | Kubernetes (AKS) | Terraform | Private Endpoints |
+| Azure Networking | Docker | GitHub Actions | Managed Identity |
+| Azure Policy | Helm | Azure DevOps | Azure AD / Entra ID |
+| App Services | Container Registry | Jenkins | RBAC & Network Policies |
+
+</div>
+
+### 📜 Certifications
+
+| Certification | Issuer | Year |
+|---|---|---|
+| 🏅 GitHub Actions | Microsoft | 2025 |
+| 🤖 Azure AI Fundamentals (AI-900) | Microsoft | 2025 |
+| 🏅 GitHub Foundations | Microsoft | 2025 |
+| ☁️ Azure Fundamentals (AZ-900) | Microsoft | 2023 |
+| 🚀 OpenHack: DevOps | Microsoft | 2021 |
+
+### 📈 GitHub Activity
+
+<div align="center">
+
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=skgandikota&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0f0f1a&title_color=6C63FF&icon_color=6C63FF&text_color=b0b0d0)
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=skgandikota&layout=compact&theme=tokyonight&hide_border=true&bg_color=0f0f1a&title_color=6C63FF&text_color=b0b0d0)
+
+</div>
+
+---
+
+<div align="center">
+
+**Open to Senior Platform Engineer, Cloud Security, and DevOps contract roles in the UK**
+
+[![Portfolio](https://img.shields.io/badge/Visit_My_Portfolio-saikoushikg.in-6C63FF?style=flat-square)](https://saikoushikg.in)
+
+</div>

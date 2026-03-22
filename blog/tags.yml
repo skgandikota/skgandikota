@@ -1,19 +1,55 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+platform-engineering:
+  label: Platform Engineering
+  permalink: /platform-engineering
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+azure:
+  label: Azure
+  permalink: /azure
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+kubernetes:
+  label: Kubernetes
+  permalink: /kubernetes
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+terraform:
+  label: Terraform
+  permalink: /terraform
+
+cloud-security:
+  label: Cloud Security
+  permalink: /cloud-security
+
+devops:
+  label: DevOps
+  permalink: /devops
+
+career:
+  label: Career
+  permalink: /career
+
+ci-cd:
+  label: CI/CD
+  permalink: /ci-cd
+
+iac:
+  label: Infrastructure as Code
+  permalink: /iac
+
+containers:
+  label: Containers
+  permalink: /containers
+
+observability:
+  label: Observability
+  permalink: /observability
+
+finops:
+  label: FinOps
+  permalink: /finops
+
+leadership:
+  label: Leadership
+  permalink: /leadership
+
+sre:
+  label: SRE
+  permalink: /sre

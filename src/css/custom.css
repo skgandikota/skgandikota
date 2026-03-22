@@ -1,30 +1,73 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+/* ============================================================
+   PREMIUM PORTFOLIO — saikoushikg.in
+   ============================================================ */
 
-/* You can override the default Infima variables here. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #6C63FF;
+  --ifm-color-primary-dark: #5A52E0;
+  --ifm-color-primary-darker: #4D45D6;
+  --ifm-color-primary-darkest: #3D36B0;
+  --ifm-color-primary-light: #7E77FF;
+  --ifm-color-primary-lighter: #8B85FF;
+  --ifm-color-primary-lightest: #A9A4FF;
+  --sk-bg: #ffffff;
+  --sk-bg-alt: #f8f9fc;
+  --sk-text: #1a1a2e;
+  --sk-text2: #4a4a6a;
+  --sk-muted: #8888a8;
+  --sk-border: #e8e8f0;
+  --sk-card: #ffffff;
+  --sk-shadow: 0 4px 24px rgba(108,99,255,0.08);
+  --sk-shadow-hover: 0 8px 40px rgba(108,99,255,0.15);
+  --sk-grad: linear-gradient(135deg, #6C63FF 0%, #3B82F6 50%, #06B6D4 100%);
+  --sk-grad-sub: linear-gradient(135deg, rgba(108,99,255,0.05) 0%, rgba(59,130,246,0.05) 100%);
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --ifm-heading-font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(0,0,0,0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #8B85FF;
+  --ifm-color-primary-dark: #6C63FF;
+  --ifm-color-primary-darker: #5A52E0;
+  --ifm-color-primary-darkest: #4D45D6;
+  --ifm-color-primary-light: #A9A4FF;
+  --ifm-color-primary-lighter: #B8B4FF;
+  --ifm-color-primary-lightest: #D4D1FF;
+  --sk-bg: #0f0f1a;
+  --sk-bg-alt: #16162a;
+  --sk-text: #f0f0ff;
+  --sk-text2: #b0b0d0;
+  --sk-muted: #6a6a8a;
+  --sk-border: #2a2a45;
+  --sk-card: #1a1a30;
+  --sk-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --sk-shadow-hover: 0 8px 40px rgba(108,99,255,0.25);
+  --sk-grad-sub: linear-gradient(135deg, rgba(108,99,255,0.08) 0%, rgba(59,130,246,0.08) 100%);
+  --docusaurus-highlighted-code-line-bg: rgba(0,0,0,0.3);
 }
+
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Navbar */
+.navbar {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(15,15,26,0.88) !important;
+  border-bottom: 1px solid rgba(108,99,255,0.1);
+}
+.navbar__link { font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em; }
+.navbar__link:hover { color: var(--ifm-color-primary) !important; }
+
+/* Footer */
+.footer--dark { background: #0a0a14; border-top: 1px solid rgba(108,99,255,0.1); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--sk-bg); }
+::-webkit-scrollbar-thumb { background: rgba(108,99,255,0.3); border-radius: 3px; }
+::selection { background: rgba(108,99,255,0.3); }
