@@ -26,7 +26,10 @@ const config: Config = {
     [
       'classic',
       {
-        docs: false,
+        docs: {
+          sidebarPath: './sidebars.ts',
+          routeBasePath: 'notes',
+        },
         blog: {
           showReadingTime: true,
           feedOptions: {
@@ -63,6 +66,7 @@ const config: Config = {
         {href: '/#experience', label: 'Experience', position: 'left'},
         {href: '/#skills', label: 'Skills', position: 'left'},
         {to: '/blog', label: 'Blog', position: 'left'},
+        {to: '/notes', label: 'Notes', position: 'left'},
         {
           href: 'https://linkedin.com/in/saikoushikg',
           label: 'LinkedIn',
@@ -90,6 +94,7 @@ const config: Config = {
           title: 'Content',
           items: [
             {label: 'Blog', to: '/blog'},
+            {label: 'Study Notes', to: '/notes'},
           ],
         },
       ],
