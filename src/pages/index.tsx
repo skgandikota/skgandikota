@@ -124,9 +124,9 @@ function Hero() {
       <div className={styles.heroBg} />
       <div className={styles.heroBg2} />
       <div className={styles.heroContent}>
-        <div className={styles.heroProfile}>
+        {/* <div className={styles.heroProfile}>
           <img src="/img/profile.jpg" alt="Saikoushik Gandikota" className={styles.heroAvatar} />
-        </div>
+        </div> */}
         <span className={styles.eyebrow}>☁️ Open to Contract & Permanent Roles</span>
         <h1 className={styles.heroName}>
           Hi, I'm <span className={styles.gradientText}>Saikoushik</span>
