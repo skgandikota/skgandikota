@@ -12,7 +12,7 @@ Personal knowledge base — notes taken while studying for certifications, explo
 | Topic | What's Inside |
 |-------|---------------|
 | **Azure** | AZ-104, Landing Zones, Networking, Security |
-| **Kubernetes** | CKA prep, RBAC, Networking, Troubleshooting |
+| **Kubernetes** | CKA & CKAD prep — 13 comprehensive study guides covering all exam domains |
 | **Terraform** | Modules, State, Testing, Patterns |
 | **Platform Engineering** | IDP, Backstage, Golden Paths, Team Topologies |
 | **Security** | Zero Trust, Policy, Identity, Compliance |
