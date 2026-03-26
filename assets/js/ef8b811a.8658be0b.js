@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunksaikoushikg=self.webpackChunksaikoushikg||[]).push([[8947],{6600:i=>{i.exports=JSON.parse('{"authors":[{"name":"Saikoushik Gandikota","title":"Senior Platform Engineer","url":"https://linkedin.com/in/saikoushikg","imageURL":"/img/profile.jpg","key":"saikoushik","page":null,"count":28}]}')}}]);

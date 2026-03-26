@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <rect width="44" height="44" rx="11" fill="url(#grad)"/>
+  <text x="50%" y="54%" dominant-baseline="central" text-anchor="middle" font-family="Inter, -apple-system, system-ui, sans-serif" font-weight="800" font-size="16" fill="white">GSK</text>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="44" y2="44">
+      <stop offset="0%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+</svg>

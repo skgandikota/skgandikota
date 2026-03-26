@@ -1,0 +1,850 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://saikoushikg.in/blog</id>
+    <title>Saikoushik Gandikota Blog</title>
+    <updated>2026-03-21T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://saikoushikg.in/blog"/>
+    <subtitle>Saikoushik Gandikota Blog</subtitle>
+    <icon>https://saikoushikg.in/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Platform Engineering Isn't About Kubernetes — It's About Removing Friction]]></title>
+        <id>https://saikoushikg.in/blog/platform-engineering-not-about-kubernetes</id>
+        <link href="https://saikoushikg.in/blog/platform-engineering-not-about-kubernetes"/>
+        <updated>2026-03-21T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Most teams don't need a "DevOps transformation." They need three things:]]></summary>
+        <content type="html"><![CDATA[<p>Most teams don't need a "DevOps transformation." They need three things:</p>
+<ol>
+<li>A working CI/CD pipeline they didn't have to build from scratch</li>
+<li>An environment they can spin up without filing a ticket</li>
+<li>Documentation that's actually current</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-real-problem">The Real Problem<a href="https://saikoushikg.in/blog/platform-engineering-not-about-kubernetes#the-real-problem" class="hash-link" aria-label="Direct link to The Real Problem" title="Direct link to The Real Problem">​</a></h2>
+<p>Over the past few years, I've helped onboard 90+ engineering teams onto a shared platform. The biggest win wasn't the technology — Kubernetes, Terraform, or Backstage. It was <strong>removing the 2-week wait for infrastructure.</strong></p>
+<p>Before the platform, a new team joining the organisation had to:</p>
+<ul>
+<li>File an infrastructure request</li>
+<li>Wait for approvals across 2-3 teams</li>
+<li>Get network configs, namespaces, and CI/CD set up manually</li>
+<li>Debug why their deployment wasn't working in the new environment</li>
+</ul>
+<p>After? They use a scaffolding template. Pick their stack → auto-provisioned infra → deployed in hours. Same security. Same compliance. Zero waiting.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-platform-engineering-actually-is">What Platform Engineering Actually Is<a href="https://saikoushikg.in/blog/platform-engineering-not-about-kubernetes#what-platform-engineering-actually-is" class="hash-link" aria-label="Direct link to What Platform Engineering Actually Is" title="Direct link to What Platform Engineering Actually Is">​</a></h2>
+<p>It's not about running Kubernetes clusters. It's about <strong>making the right thing the easy thing</strong>.</p>
+<ul>
+<li><strong>Golden paths</strong> over gatekeeping — give teams a paved road, not a gate to pass through</li>
+<li><strong>Self-service</strong> over ticket queues — infrastructure should be a product, not a request</li>
+<li><strong>Secure by default</strong> over security reviews — bake compliance into the template, not the approval process</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-mindset-shift">The Mindset Shift<a href="https://saikoushikg.in/blog/platform-engineering-not-about-kubernetes#the-mindset-shift" class="hash-link" aria-label="Direct link to The Mindset Shift" title="Direct link to The Mindset Shift">​</a></h2>
+<p>The hardest part isn't technical. It's convincing an organisation to treat infrastructure as a <strong>product</strong> rather than a <strong>cost centre</strong>. When you start thinking "who are my users and what's their experience?", everything changes.</p>
+<p>Platform engineering isn't about Kubernetes. It's about removing friction.</p>
+<hr>
+<p><em>What's the biggest bottleneck your engineering teams face today? I'd love to hear your experience — connect with me on <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Platform Engineering" term="Platform Engineering"/>
+        <category label="Kubernetes" term="Kubernetes"/>
+        <category label="DevOps" term="DevOps"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Why Your Terraform Code Looks Like Spaghetti (And How to Fix It)]]></title>
+        <id>https://saikoushikg.in/blog/terraform-spaghetti-code</id>
+        <link href="https://saikoushikg.in/blog/terraform-spaghetti-code"/>
+        <updated>2026-03-20T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[I've reviewed Terraform codebases across 4 organisations now. The pattern is always the same: it starts clean, then someone adds "just one more resource," and 6 months later you have a 2,000-line main.tf that nobody wants to touch.]]></summary>
+        <content type="html"><![CDATA[<p>I've reviewed Terraform codebases across 4 organisations now. The pattern is always the same: it starts clean, then someone adds "just one more resource," and 6 months later you have a 2,000-line main.tf that nobody wants to touch.</p>
+<p>Here's why it happens and how to fix it.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-3-root-causes">The 3 Root Causes<a href="https://saikoushikg.in/blog/terraform-spaghetti-code#the-3-root-causes" class="hash-link" aria-label="Direct link to The 3 Root Causes" title="Direct link to The 3 Root Causes">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-no-module-strategy">1. No Module Strategy<a href="https://saikoushikg.in/blog/terraform-spaghetti-code#1-no-module-strategy" class="hash-link" aria-label="Direct link to 1. No Module Strategy" title="Direct link to 1. No Module Strategy">​</a></h3>
+<p>Teams start writing resources inline. By month 3, they have networking, compute, storage, and IAM all in one folder. The fix: <strong>modules from day one</strong>. Even if it feels like over-engineering, create a module for each logical domain.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-state-file-chaos">2. State File Chaos<a href="https://saikoushikg.in/blog/terraform-spaghetti-code#2-state-file-chaos" class="hash-link" aria-label="Direct link to 2. State File Chaos" title="Direct link to 2. State File Chaos">​</a></h3>
+<p>One state file for everything. One mistake and you're planning to destroy your production database alongside a DNS change. The fix: <strong>state isolation by environment AND by domain</strong>. Network state should never live with application state.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-copy-paste-across-environments">3. Copy-Paste Across Environments<a href="https://saikoushikg.in/blog/terraform-spaghetti-code#3-copy-paste-across-environments" class="hash-link" aria-label="Direct link to 3. Copy-Paste Across Environments" title="Direct link to 3. Copy-Paste Across Environments">​</a></h3>
+<p>Dev, staging, prod — three folders with 90% identical code. One gets updated, the others drift. The fix: <strong>use workspaces or terragrunt</strong>. Single source of truth, variables for environment-specific differences.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-clean-structure">The Clean Structure<a href="https://saikoushikg.in/blog/terraform-spaghetti-code#the-clean-structure" class="hash-link" aria-label="Direct link to The Clean Structure" title="Direct link to The Clean Structure">​</a></h2>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">infrastructure/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── modules/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   ├── networking/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   ├── compute/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   ├── database/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   └── monitoring/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── environments/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   ├── dev.tfvars</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   ├── staging.tfvars</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   └── prod.tfvars</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── main.tf</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── variables.tf</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">└── outputs.tf</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-rule-i-follow">The Rule I Follow<a href="https://saikoushikg.in/blog/terraform-spaghetti-code#the-rule-i-follow" class="hash-link" aria-label="Direct link to The Rule I Follow" title="Direct link to The Rule I Follow">​</a></h2>
+<p>If a resource block has more than 30 lines, it belongs in a module. If a module has more than 5 resources, it might need splitting. If you can't explain what a file does in one sentence, it's doing too much.</p>
+<p>Clean Terraform isn't about being clever. It's about making the next person's life easier — and that next person is usually you in 3 months.</p>
+<hr>
+<p><em>How do you organise your Terraform codebases? Share your approach — <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">connect with me on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Terraform" term="Terraform"/>
+        <category label="Infrastructure as Code" term="Infrastructure as Code"/>
+        <category label="DevOps" term="DevOps"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[The Real Cost of Not Having a Platform Team]]></title>
+        <id>https://saikoushikg.in/blog/real-cost-no-platform-team</id>
+        <link href="https://saikoushikg.in/blog/real-cost-no-platform-team"/>
+        <updated>2026-03-18T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["We can't justify a platform team — our developers can manage their own infrastructure."]]></summary>
+        <content type="html"><![CDATA[<p>"We can't justify a platform team — our developers can manage their own infrastructure."</p>
+<p>I've heard this from three CTOs in the last year. Here's what they didn't realise they were already paying.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-hidden-tax">The Hidden Tax<a href="https://saikoushikg.in/blog/real-cost-no-platform-team#the-hidden-tax" class="hash-link" aria-label="Direct link to The Hidden Tax" title="Direct link to The Hidden Tax">​</a></h2>
+<p>Without a platform team, every product team independently solves the same problems:</p>
+<ul>
+<li><strong>CI/CD</strong>: 8 teams × 3 weeks each = 24 weeks of engineering time building pipelines</li>
+<li><strong>Environment provisioning</strong>: 2-3 days per request, 5 requests per week = 1 full-time person just processing tickets</li>
+<li><strong>Security compliance</strong>: Each team interprets policies differently → audit findings → remediation sprints</li>
+<li><strong>Onboarding</strong>: New joiners spend 2 weeks understanding "how we deploy here"</li>
+</ul>
+<p>Add it up. You're spending 3-4 FTEs worth of effort on undifferentiated infrastructure work. A platform team of 3-4 engineers would centralise all of this AND do it better.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-changes-with-a-platform-team">What Changes With a Platform Team<a href="https://saikoushikg.in/blog/real-cost-no-platform-team#what-changes-with-a-platform-team" class="hash-link" aria-label="Direct link to What Changes With a Platform Team" title="Direct link to What Changes With a Platform Team">​</a></h2>
+<table><thead><tr><th>Before</th><th>After</th></tr></thead><tbody><tr><td>2-week environment setup</td><td>30-minute self-service</td></tr><tr><td>Each team builds CI/CD</td><td>Shared pipeline templates</td></tr><tr><td>Security bolted on later</td><td>Security baked into templates</td></tr><tr><td>Tribal knowledge</td><td>Documented golden paths</td></tr><tr><td>8 ways to deploy</td><td>1 paved road</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-roi-calculation">The ROI Calculation<a href="https://saikoushikg.in/blog/real-cost-no-platform-team#the-roi-calculation" class="hash-link" aria-label="Direct link to The ROI Calculation" title="Direct link to The ROI Calculation">​</a></h2>
+<p>At one organisation, we measured it:</p>
+<ul>
+<li><strong>Before platform</strong>: 18 days average from code-complete to production</li>
+<li><strong>After platform</strong>: 3 days average</li>
+<li><strong>Developer satisfaction</strong>: up 40% (internal survey)</li>
+<li><strong>Security incidents from misconfig</strong>: down 70%</li>
+</ul>
+<p>The platform team didn't slow anyone down. It removed the friction that was already slowing everyone down.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-pitch">The Pitch<a href="https://saikoushikg.in/blog/real-cost-no-platform-team#the-pitch" class="hash-link" aria-label="Direct link to The Pitch" title="Direct link to The Pitch">​</a></h2>
+<p>If you're trying to justify a platform team to leadership, don't talk about Kubernetes or Terraform. Talk about <strong>developer hours recovered</strong>, <strong>time-to-production reduced</strong>, and <strong>compliance risk eliminated</strong>.</p>
+<p>Executives don't buy tools. They buy outcomes.</p>
+<hr>
+<p><em>Building the case for a platform team at your org? I've been through this — <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">let's connect on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Platform Engineering" term="Platform Engineering"/>
+        <category label="DevOps" term="DevOps"/>
+        <category label="Leadership" term="Leadership"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Azure Landing Zones: What Nobody Tells You]]></title>
+        <id>https://saikoushikg.in/blog/azure-landing-zones-nobody-tells-you</id>
+        <link href="https://saikoushikg.in/blog/azure-landing-zones-nobody-tells-you"/>
+        <updated>2026-03-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Microsoft's Cloud Adoption Framework gives you a beautiful diagram of Azure Landing Zones. Neat boxes, clean lines, management groups in perfect hierarchy. What it doesn't tell you is how much pain lies between that diagram and reality.]]></summary>
+        <content type="html"><![CDATA[<p>Microsoft's Cloud Adoption Framework gives you a beautiful diagram of Azure Landing Zones. Neat boxes, clean lines, management groups in perfect hierarchy. What it doesn't tell you is how much pain lies between that diagram and reality.</p>
+<p>Here's what I learned implementing landing zones for enterprise workloads.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-the-management-group-hierarchy-will-be-political">1. The Management Group Hierarchy Will Be Political<a href="https://saikoushikg.in/blog/azure-landing-zones-nobody-tells-you#1-the-management-group-hierarchy-will-be-political" class="hash-link" aria-label="Direct link to 1. The Management Group Hierarchy Will Be Political" title="Direct link to 1. The Management Group Hierarchy Will Be Political">​</a></h2>
+<p>The CAF recommends a standard hierarchy: Root → Platform → Landing Zones → Decommissioned. Sounds clean. In practice, every business unit wants their own management group. Every team wants exceptions to policies.</p>
+<p><strong>What worked for us</strong>: Start with the CAF default. Resist customisation for the first 3 months. Let teams feel the friction of the standard model before deciding what genuinely needs changing versus what's just preference.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-azure-policy-will-break-things">2. Azure Policy Will Break Things<a href="https://saikoushikg.in/blog/azure-landing-zones-nobody-tells-you#2-azure-policy-will-break-things" class="hash-link" aria-label="Direct link to 2. Azure Policy Will Break Things" title="Direct link to 2. Azure Policy Will Break Things">​</a></h2>
+<p>You'll deploy policies for allowed regions, required tags, denied SKUs. On day one, something will break. A legacy app needs a region you blocked. A third-party tool doesn't support mandatory tags.</p>
+<p><strong>What worked for us</strong>: Deploy policies in audit mode first. Run for 2 weeks. Review the compliance report. THEN switch to deny. This single decision saved us from 3 production incidents.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-networking-is-where-projects-go-to-die">3. Networking Is Where Projects Go to Die<a href="https://saikoushikg.in/blog/azure-landing-zones-nobody-tells-you#3-networking-is-where-projects-go-to-die" class="hash-link" aria-label="Direct link to 3. Networking Is Where Projects Go to Die" title="Direct link to 3. Networking Is Where Projects Go to Die">​</a></h2>
+<p>Hub-and-spoke vs. Virtual WAN. Private DNS zones. ExpressRoute vs. VPN. Firewall placement. Each decision has cascading implications.</p>
+<p><strong>What worked for us</strong>: Document every CIDR allocation in a spreadsheet BEFORE touching Terraform. Plan for 3x the IP space you think you need. Future you will be grateful.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-subscription-vending-is-the-real-value">4. Subscription Vending Is the Real Value<a href="https://saikoushikg.in/blog/azure-landing-zones-nobody-tells-you#4-subscription-vending-is-the-real-value" class="hash-link" aria-label="Direct link to 4. Subscription Vending Is the Real Value" title="Direct link to 4. Subscription Vending Is the Real Value">​</a></h2>
+<p>The landing zone itself is just governance. The magic is <strong>subscription vending</strong> — giving teams a new, policy-compliant subscription in minutes instead of weeks.</p>
+<p>We built a self-service portal: team fills a form → Terraform provisions subscription → applies policies → sets up networking → notifies the team. From 3 weeks to 30 minutes.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-takeaway">The Takeaway<a href="https://saikoushikg.in/blog/azure-landing-zones-nobody-tells-you#the-takeaway" class="hash-link" aria-label="Direct link to The Takeaway" title="Direct link to The Takeaway">​</a></h2>
+<p>Azure Landing Zones aren't a one-time setup. They're a living product. Budget for ongoing maintenance, policy updates, and team support — or they'll become the governance layer everyone works around instead of within.</p>
+<hr>
+<p><em>Implementing landing zones? I'd love to compare notes — <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">connect with me on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Azure" term="Azure"/>
+        <category label="Cloud Security" term="Cloud Security"/>
+        <category label="Terraform" term="Terraform"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Stop Treating Infrastructure as Code Like Application Code]]></title>
+        <id>https://saikoushikg.in/blog/iac-not-application-code</id>
+        <link href="https://saikoushikg.in/blog/iac-not-application-code"/>
+        <updated>2026-03-13T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["We apply the same engineering practices to our Terraform as we do to our application code."]]></summary>
+        <content type="html"><![CDATA[<p>"We apply the same engineering practices to our Terraform as we do to our application code."</p>
+<p>This sounds responsible. It's also why your infrastructure deployments take 3 weeks to get through code review.</p>
+<p>Infrastructure as Code is code, yes. But it's a fundamentally different KIND of code. Treating it identically to application code creates more problems than it solves.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="where-the-analogy-breaks-down">Where the Analogy Breaks Down<a href="https://saikoushikg.in/blog/iac-not-application-code#where-the-analogy-breaks-down" class="hash-link" aria-label="Direct link to Where the Analogy Breaks Down" title="Direct link to Where the Analogy Breaks Down">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="testing-is-different">Testing Is Different<a href="https://saikoushikg.in/blog/iac-not-application-code#testing-is-different" class="hash-link" aria-label="Direct link to Testing Is Different" title="Direct link to Testing Is Different">​</a></h3>
+<p>Application code: unit tests, integration tests, end-to-end tests. Clear, fast feedback loop.</p>
+<p>Infrastructure code: <code>terraform plan</code> IS your test. You can lint with tflint, validate with OPA/Sentinel, but the real test is the plan output. Trying to build a unit test pyramid for Terraform is over-engineering.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="code-review-is-different">Code Review Is Different<a href="https://saikoushikg.in/blog/iac-not-application-code#code-review-is-different" class="hash-link" aria-label="Direct link to Code Review Is Different" title="Direct link to Code Review Is Different">​</a></h3>
+<p>Application code reviews focus on logic, performance, maintainability.</p>
+<p>Infrastructure code reviews should focus on: <strong>Will this break something? Does this comply with policy? Is the blast radius acceptable?</strong> The reviewer needs to read the plan output, not just the HCL diff.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="branching-strategy-is-different">Branching Strategy Is Different<a href="https://saikoushikg.in/blog/iac-not-application-code#branching-strategy-is-different" class="hash-link" aria-label="Direct link to Branching Strategy Is Different" title="Direct link to Branching Strategy Is Different">​</a></h3>
+<p>Feature branches work for applications. For infrastructure, long-lived branches are dangerous — state drift makes merges painful or impossible.</p>
+<p><strong>What works</strong>: Short-lived branches, merge to main quickly, use workspaces or separate state files for isolation — not branches.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-actually-matters">What Actually Matters<a href="https://saikoushikg.in/blog/iac-not-application-code#what-actually-matters" class="hash-link" aria-label="Direct link to What Actually Matters" title="Direct link to What Actually Matters">​</a></h2>
+<ol>
+<li><strong>Plan before apply. Always.</strong> No exceptions. Automated or manual, someone reads the plan.</li>
+<li><strong>State is sacred.</strong> Backup it. Lock it. Never manually edit it unless you absolutely know what you're doing.</li>
+<li><strong>Blast radius control.</strong> Split state files so a mistake in networking can't destroy your databases.</li>
+<li><strong>Drift detection.</strong> Schedule regular <code>terraform plan</code> runs against production. If there's drift, investigate before it compounds.</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-bottom-line">The Bottom Line<a href="https://saikoushikg.in/blog/iac-not-application-code#the-bottom-line" class="hash-link" aria-label="Direct link to The Bottom Line" title="Direct link to The Bottom Line">​</a></h2>
+<p>Infrastructure code deserves engineering rigour. But that rigour should be <strong>infrastructure-appropriate</strong>, not copy-pasted from your application development playbook.</p>
+<hr>
+<p><em>How does your team handle IaC differently from app code? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Let's discuss on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Terraform" term="Terraform"/>
+        <category label="Infrastructure as Code" term="Infrastructure as Code"/>
+        <category label="DevOps" term="DevOps"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Kubernetes RBAC Is Not Optional — It's Your First Line of Defence]]></title>
+        <id>https://saikoushikg.in/blog/kubernetes-rbac-not-optional</id>
+        <link href="https://saikoushikg.in/blog/kubernetes-rbac-not-optional"/>
+        <updated>2026-03-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["We'll add RBAC later."]]></summary>
+        <content type="html"><![CDATA[<p>"We'll add RBAC later."</p>
+<p>I've heard this sentence on 4 different projects. "Later" usually means "after the security audit finds it" or "after an incident."</p>
+<p>RBAC isn't a nice-to-have. In a shared Kubernetes cluster, it's the difference between teams coexisting safely and one team accidentally deleting another's production workloads.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-default-is-dangerous">The Default Is Dangerous<a href="https://saikoushikg.in/blog/kubernetes-rbac-not-optional#the-default-is-dangerous" class="hash-link" aria-label="Direct link to The Default Is Dangerous" title="Direct link to The Default Is Dangerous">​</a></h2>
+<p>Out-of-the-box Kubernetes gives the default service account in every namespace far more permissions than it should have. If you haven't explicitly configured RBAC, your pods can likely:</p>
+<ul>
+<li>List secrets across namespaces</li>
+<li>Create and delete deployments they shouldn't touch</li>
+<li>Access the Kubernetes API with cluster-wide permissions</li>
+</ul>
+<p>That's not a hypothetical. I've seen a CI/CD pipeline with cluster-admin because "it was easier to set up."</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-minimum-viable-rbac">The Minimum Viable RBAC<a href="https://saikoushikg.in/blog/kubernetes-rbac-not-optional#the-minimum-viable-rbac" class="hash-link" aria-label="Direct link to The Minimum Viable RBAC" title="Direct link to The Minimum Viable RBAC">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-namespace-isolation">1. Namespace Isolation<a href="https://saikoushikg.in/blog/kubernetes-rbac-not-optional#1-namespace-isolation" class="hash-link" aria-label="Direct link to 1. Namespace Isolation" title="Direct link to 1. Namespace Isolation">​</a></h3>
+<p>Every team gets their own namespace. No cross-namespace access by default.</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token key atrule">apiVersion</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> rbac.authorization.k8s.io/v1</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">kind</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> RoleBinding</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">metadata</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">name</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> team</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">alpha</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">access</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">namespace</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> team</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">alpha</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">subjects</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> </span><span class="token key atrule">kind</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> Group</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">name</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> team</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">alpha</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">roleRef</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">kind</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> ClusterRole</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">name</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> edit</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">apiGroup</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> rbac.authorization.k8s.io</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-service-account-per-workload">2. Service Account Per Workload<a href="https://saikoushikg.in/blog/kubernetes-rbac-not-optional#2-service-account-per-workload" class="hash-link" aria-label="Direct link to 2. Service Account Per Workload" title="Direct link to 2. Service Account Per Workload">​</a></h3>
+<p>Don't share service accounts. Each workload gets its own with minimum required permissions.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-no-cluster-admin-for-humans">3. No Cluster-Admin for Humans<a href="https://saikoushikg.in/blog/kubernetes-rbac-not-optional#3-no-cluster-admin-for-humans" class="hash-link" aria-label="Direct link to 3. No Cluster-Admin for Humans" title="Direct link to 3. No Cluster-Admin for Humans">​</a></h3>
+<p>Use <code>admin</code> or <code>edit</code> roles scoped to namespaces. Reserve <code>cluster-admin</code> for automation accounts with audit trails.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-audit-logging">4. Audit Logging<a href="https://saikoushikg.in/blog/kubernetes-rbac-not-optional#4-audit-logging" class="hash-link" aria-label="Direct link to 4. Audit Logging" title="Direct link to 4. Audit Logging">​</a></h3>
+<p>Enable Kubernetes audit logs. You need to know WHO did WHAT and WHEN. Without this, RBAC is security theatre.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-platform-engineering-angle">The Platform Engineering Angle<a href="https://saikoushikg.in/blog/kubernetes-rbac-not-optional#the-platform-engineering-angle" class="hash-link" aria-label="Direct link to The Platform Engineering Angle" title="Direct link to The Platform Engineering Angle">​</a></h2>
+<p>At scale, you don't manually create RBAC configs for each team. You <strong>template it</strong>. New namespace request → auto-generated RBAC → team gets access to their namespace only. This is what a platform team enables.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-one-rule">The One Rule<a href="https://saikoushikg.in/blog/kubernetes-rbac-not-optional#the-one-rule" class="hash-link" aria-label="Direct link to The One Rule" title="Direct link to The One Rule">​</a></h2>
+<p>If someone says "just give it cluster-admin for now," push back. Every. Single. Time. The security debt compounds faster than you think.</p>
+<hr>
+<p><em>How do you manage RBAC at scale? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Share your approach on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Kubernetes" term="Kubernetes"/>
+        <category label="Cloud Security" term="Cloud Security"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[The 3 CI/CD Anti-Patterns I See in Every Organisation]]></title>
+        <id>https://saikoushikg.in/blog/cicd-anti-patterns</id>
+        <link href="https://saikoushikg.in/blog/cicd-anti-patterns"/>
+        <updated>2026-03-08T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[I've helped build or fix CI/CD pipelines at 4 organisations across retail, insurance, and financial services. The technology changes — Jenkins, Azure DevOps, GitHub Actions — but the anti-patterns are always the same.]]></summary>
+        <content type="html"><![CDATA[<p>I've helped build or fix CI/CD pipelines at 4 organisations across retail, insurance, and financial services. The technology changes — Jenkins, Azure DevOps, GitHub Actions — but the anti-patterns are always the same.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="anti-pattern-1-the-45-minute-pipeline">Anti-Pattern 1: The 45-Minute Pipeline<a href="https://saikoushikg.in/blog/cicd-anti-patterns#anti-pattern-1-the-45-minute-pipeline" class="hash-link" aria-label="Direct link to Anti-Pattern 1: The 45-Minute Pipeline" title="Direct link to Anti-Pattern 1: The 45-Minute Pipeline">​</a></h2>
+<p>The pipeline does EVERYTHING: lint, test, build, scan, package, deploy to dev, run integration tests, deploy to staging, run smoke tests, wait for approval, deploy to prod.</p>
+<p>One pipeline. One run. 45 minutes if nothing fails.</p>
+<p><strong>The fix</strong>: Split it. Build pipeline and deploy pipeline are separate. Build once, promote the artifact. Each stage should be independently re-runnable. If the smoke tests fail in staging, you shouldn't need to rebuild from scratch.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="anti-pattern-2-secrets-in-the-pipeline-definition">Anti-Pattern 2: Secrets in the Pipeline Definition<a href="https://saikoushikg.in/blog/cicd-anti-patterns#anti-pattern-2-secrets-in-the-pipeline-definition" class="hash-link" aria-label="Direct link to Anti-Pattern 2: Secrets in the Pipeline Definition" title="Direct link to Anti-Pattern 2: Secrets in the Pipeline Definition">​</a></h2>
+<p>Environment variables with database passwords. AWS keys stored as pipeline variables. "Temporary" credentials that have been there for 2 years.</p>
+<p><strong>The fix</strong>: External secret management. Azure Key Vault, HashiCorp Vault, AWS Secrets Manager — pick one. The pipeline FETCHES secrets at runtime. No secrets in YAML files. No secrets in environment variables. Ever.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="anti-pattern-3-the-snowflake-pipeline">Anti-Pattern 3: The Snowflake Pipeline<a href="https://saikoushikg.in/blog/cicd-anti-patterns#anti-pattern-3-the-snowflake-pipeline" class="hash-link" aria-label="Direct link to Anti-Pattern 3: The Snowflake Pipeline" title="Direct link to Anti-Pattern 3: The Snowflake Pipeline">​</a></h2>
+<p>Team A uses a completely custom pipeline they built from scratch. Team B copied it and modified it. Team C built something entirely different. Now you have 15 pipelines, all slightly broken in different ways.</p>
+<p><strong>The fix</strong>: Pipeline templates. A shared library of reusable pipeline stages maintained by the platform team. Teams compose from templates, don't build from scratch.</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token comment" style="color:rgb(98, 114, 164)"># Instead of 200 lines of custom YAML</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">stages</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> </span><span class="token key atrule">template</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> templates/build</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">dotnet.yml</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> </span><span class="token key atrule">template</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> templates/scan</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">container.yml</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> </span><span class="token key atrule">template</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> templates/deploy</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">aks.yml</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">parameters</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">      </span><span class="token key atrule">environment</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> production</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-meta-pattern">The Meta-Pattern<a href="https://saikoushikg.in/blog/cicd-anti-patterns#the-meta-pattern" class="hash-link" aria-label="Direct link to The Meta-Pattern" title="Direct link to The Meta-Pattern">​</a></h2>
+<p>All three anti-patterns share a root cause: <strong>no one owns the CI/CD experience</strong>. When pipelines are each team's problem, every team solves it differently and usually incompletely.</p>
+<p>A platform team that owns pipeline templates, enforces security standards, and optimises build times will save more engineering hours than almost any other investment.</p>
+<hr>
+<p><em>Which CI/CD anti-pattern is most painful in your org? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Let me know on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="DevOps" term="DevOps"/>
+        <category label="CI/CD" term="CI/CD"/>
+        <category label="Platform Engineering" term="Platform Engineering"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[FinOps Isn't About Cutting Costs — It's About Making Informed Decisions]]></title>
+        <id>https://saikoushikg.in/blog/finops-not-cutting-costs</id>
+        <link href="https://saikoushikg.in/blog/finops-not-cutting-costs"/>
+        <updated>2026-03-05T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[When leadership says "we need FinOps," what they usually mean is "our cloud bill is too high — make it smaller."]]></summary>
+        <content type="html"><![CDATA[<p>When leadership says "we need FinOps," what they usually mean is "our cloud bill is too high — make it smaller."</p>
+<p>But FinOps isn't about spending less. It's about spending right. Sometimes that means spending MORE — on reserved instances, on better architecture, on tools that prevent waste at scale.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-first-thing-i-do-on-any-finops-engagement">The First Thing I Do on Any FinOps Engagement<a href="https://saikoushikg.in/blog/finops-not-cutting-costs#the-first-thing-i-do-on-any-finops-engagement" class="hash-link" aria-label="Direct link to The First Thing I Do on Any FinOps Engagement" title="Direct link to The First Thing I Do on Any FinOps Engagement">​</a></h2>
+<p><strong>Tag everything.</strong></p>
+<p>Not after. Not "when we have time." Before anything else.</p>
+<p>Without consistent tags, you cannot answer the most basic question: "Which team is responsible for this cost?" If you can't answer that, every other FinOps practice is guessing.</p>
+<p>Minimum tag set:</p>
+<ul>
+<li><code>team</code> — who owns this</li>
+<li><code>environment</code> — dev/staging/prod</li>
+<li><code>project</code> — what business initiative</li>
+<li><code>cost-centre</code> — who pays</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-quick-wins-first-30-days">The Quick Wins (First 30 Days)<a href="https://saikoushikg.in/blog/finops-not-cutting-costs#the-quick-wins-first-30-days" class="hash-link" aria-label="Direct link to The Quick Wins (First 30 Days)" title="Direct link to The Quick Wins (First 30 Days)">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-kill-the-zombies">1. Kill the Zombies<a href="https://saikoushikg.in/blog/finops-not-cutting-costs#1-kill-the-zombies" class="hash-link" aria-label="Direct link to 1. Kill the Zombies" title="Direct link to 1. Kill the Zombies">​</a></h3>
+<p>Resources running with no traffic, no connections, no purpose. Every Azure subscription has them. Orphaned disks, unused public IPs, empty App Service plans.</p>
+<p><strong>Typical saving</strong>: 15-25% of the monthly bill.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-right-size-compute">2. Right-Size Compute<a href="https://saikoushikg.in/blog/finops-not-cutting-costs#2-right-size-compute" class="hash-link" aria-label="Direct link to 2. Right-Size Compute" title="Direct link to 2. Right-Size Compute">​</a></h3>
+<p>That D4s_v3 running at 8% CPU utilisation? It should be a B2ms. Azure Advisor literally tells you this. Most teams ignore it.</p>
+<p><strong>Typical saving</strong>: 10-20% on compute costs.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-reserved-instances-for-steady-state">3. Reserved Instances for Steady-State<a href="https://saikoushikg.in/blog/finops-not-cutting-costs#3-reserved-instances-for-steady-state" class="hash-link" aria-label="Direct link to 3. Reserved Instances for Steady-State" title="Direct link to 3. Reserved Instances for Steady-State">​</a></h3>
+<p>If a workload has been running 24/7 for 6 months, it's not going away. Buy a 1-year reservation.</p>
+<p><strong>Typical saving</strong>: 30-40% vs pay-as-you-go.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-culture-shift">The Culture Shift<a href="https://saikoushikg.in/blog/finops-not-cutting-costs#the-culture-shift" class="hash-link" aria-label="Direct link to The Culture Shift" title="Direct link to The Culture Shift">​</a></h2>
+<p>The real FinOps transformation isn't tooling. It's making cost a first-class engineering metric. Every sprint review should include: "What does this feature cost to run?"</p>
+<p>When engineers see the cost of their decisions, behaviour changes naturally. You don't need approval gates — you need visibility.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-dashboard-that-changed-behaviour">The Dashboard That Changed Behaviour<a href="https://saikoushikg.in/blog/finops-not-cutting-costs#the-dashboard-that-changed-behaviour" class="hash-link" aria-label="Direct link to The Dashboard That Changed Behaviour" title="Direct link to The Dashboard That Changed Behaviour">​</a></h2>
+<p>We built a simple dashboard: cost per team per day, with a 7-day trend. Published it in the weekly engineering newsletter. Within 2 months, teams were proactively right-sizing and cleaning up resources — no mandates required.</p>
+<p>Sunlight is the best disinfectant. And the best cost optimiser.</p>
+<hr>
+<p><em>How does your org handle cloud cost visibility? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Let's compare notes on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Azure" term="Azure"/>
+        <category label="FinOps" term="FinOps"/>
+        <category label="DevOps" term="DevOps"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Why I Stopped Chasing Certifications and Started Building Things]]></title>
+        <id>https://saikoushikg.in/blog/stopped-chasing-certifications</id>
+        <link href="https://saikoushikg.in/blog/stopped-chasing-certifications"/>
+        <updated>2026-03-03T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[I have 5 cloud certifications. AWS Solutions Architect, Azure Administrator, Terraform Associate, and more. They helped me get interviews. They didn't help me pass them.]]></summary>
+        <content type="html"><![CDATA[<p>I have 5 cloud certifications. AWS Solutions Architect, Azure Administrator, Terraform Associate, and more. They helped me get interviews. They didn't help me pass them.</p>
+<p>Here's the uncomfortable truth I learned after failing a few technical interviews despite having a CV full of cert badges.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-certification-trap">The Certification Trap<a href="https://saikoushikg.in/blog/stopped-chasing-certifications#the-certification-trap" class="hash-link" aria-label="Direct link to The Certification Trap" title="Direct link to The Certification Trap">​</a></h2>
+<p>Certifications prove you can pass a test. They don't prove you can:</p>
+<ul>
+<li>Debug a failing Terraform plan at 2 AM</li>
+<li>Design a network architecture that survives a region failure</li>
+<li>Explain WHY you'd choose one approach over another</li>
+</ul>
+<p>Interviewers know this. That's why they ask scenario questions, not multiple choice. And that's where cert-holders without hands-on depth get exposed.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-changed-my-approach">What Changed My Approach<a href="https://saikoushikg.in/blog/stopped-chasing-certifications#what-changed-my-approach" class="hash-link" aria-label="Direct link to What Changed My Approach" title="Direct link to What Changed My Approach">​</a></h2>
+<p>I stopped studying for the next cert and started building:</p>
+<ol>
+<li>
+<p><strong>A home lab on Azure</strong> — provisioned with Terraform, running AKS, monitored with Prometheus. Nothing fancy. But I could talk about every decision I made and every mistake I fixed.</p>
+</li>
+<li>
+<p><strong>Open-source contributions</strong> — even small ones. Fixing documentation, adding examples, reviewing PRs. It taught me how real projects work, not how exam scenarios work.</p>
+</li>
+<li>
+<p><strong>Blog posts</strong> (like this one) — writing forces you to understand something deeply enough to explain it simply. If you can't write about it, you don't know it well enough.</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-new-rule">The New Rule<a href="https://saikoushikg.in/blog/stopped-chasing-certifications#the-new-rule" class="hash-link" aria-label="Direct link to The New Rule" title="Direct link to The New Rule">​</a></h2>
+<p>For every certification I pursue, I must build something that demonstrates the skill. Got AZ-104? Build a landing zone from scratch. Got CKA? Deploy a production-grade cluster with proper RBAC, networking, and observability.</p>
+<p>The cert is the theory. The project is the proof.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="when-certifications-do-matter">When Certifications DO Matter<a href="https://saikoushikg.in/blog/stopped-chasing-certifications#when-certifications-do-matter" class="hash-link" aria-label="Direct link to When Certifications DO Matter" title="Direct link to When Certifications DO Matter">​</a></h2>
+<p>I'm not anti-cert. They matter for:</p>
+<ul>
+<li>Getting past HR filters (especially at consultancies)</li>
+<li>Structured learning when entering a new domain</li>
+<li>Visa and immigration requirements (proving specialisation)</li>
+</ul>
+<p>But they're a starting point, not an endpoint. The engineers who get the best roles have certs AND projects AND opinions formed from real experience.</p>
+<hr>
+<p><em>What's your take — are certifications overrated or essential? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Let's debate on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Career" term="Career"/>
+        <category label="DevOps" term="DevOps"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Container Security: The 5 Things You're Probably Ignoring]]></title>
+        <id>https://saikoushikg.in/blog/container-security-ignoring</id>
+        <link href="https://saikoushikg.in/blog/container-security-ignoring"/>
+        <updated>2026-02-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Your containers are running. Your app is working. Your security posture? Probably has gaps you don't know about.]]></summary>
+        <content type="html"><![CDATA[<p>Your containers are running. Your app is working. Your security posture? Probably has gaps you don't know about.</p>
+<p>After securing containerised workloads across multiple enterprise environments, here are the 5 things I find teams consistently overlooking.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-base-image-vulnerability-scanning">1. Base Image Vulnerability Scanning<a href="https://saikoushikg.in/blog/container-security-ignoring#1-base-image-vulnerability-scanning" class="hash-link" aria-label="Direct link to 1. Base Image Vulnerability Scanning" title="Direct link to 1. Base Image Vulnerability Scanning">​</a></h2>
+<p>You're probably using <code>node:18</code> or <code>python:3.11</code> as your base image. Do you know how many CVEs are in those images right now? Usually dozens.</p>
+<p><strong>Fix</strong>: Use distroless or Alpine-based images. Scan every build with Trivy, Snyk, or Microsoft Defender for Containers. Block deployment if critical CVEs are found. Automate this in your pipeline — not as a weekly report nobody reads.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-running-as-root">2. Running as Root<a href="https://saikoushikg.in/blog/container-security-ignoring#2-running-as-root" class="hash-link" aria-label="Direct link to 2. Running as Root" title="Direct link to 2. Running as Root">​</a></h2>
+<p>The default for most containers: root. The default for production: absolutely not root.</p>
+<p><strong>Fix</strong>: Add these two lines to every Dockerfile:</p>
+<div class="language-dockerfile codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-dockerfile codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">RUN addgroup -S appgroup &amp;&amp; adduser -S appuser -G appgroup</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">USER appuser</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Then enforce it cluster-wide with a Pod Security Standard.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-no-resource-limits">3. No Resource Limits<a href="https://saikoushikg.in/blog/container-security-ignoring#3-no-resource-limits" class="hash-link" aria-label="Direct link to 3. No Resource Limits" title="Direct link to 3. No Resource Limits">​</a></h2>
+<p>A container without CPU and memory limits can consume an entire node. One runaway process and every other workload on that node degrades.</p>
+<p><strong>Fix</strong>: Set <code>requests</code> AND <code>limits</code> for every container. Use LimitRange objects to enforce defaults at the namespace level.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-secrets-mounted-as-environment-variables">4. Secrets Mounted as Environment Variables<a href="https://saikoushikg.in/blog/container-security-ignoring#4-secrets-mounted-as-environment-variables" class="hash-link" aria-label="Direct link to 4. Secrets Mounted as Environment Variables" title="Direct link to 4. Secrets Mounted as Environment Variables">​</a></h2>
+<p>Environment variables are readable by anyone who can exec into the pod. They show up in logs, crash dumps, and process listings.</p>
+<p><strong>Fix</strong>: Mount secrets as files, not environment variables. Better yet, use a secrets operator (like External Secrets Operator) that fetches from Vault or Key Vault at runtime.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="5-no-network-policies">5. No Network Policies<a href="https://saikoushikg.in/blog/container-security-ignoring#5-no-network-policies" class="hash-link" aria-label="Direct link to 5. No Network Policies" title="Direct link to 5. No Network Policies">​</a></h2>
+<p>By default, every pod can talk to every other pod. No segmentation. A compromised container has full network access to your entire cluster.</p>
+<p><strong>Fix</strong>: Apply a default-deny NetworkPolicy to every namespace, then explicitly allow required traffic. This alone would prevent a significant percentage of lateral movement attacks.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-pattern">The Pattern<a href="https://saikoushikg.in/blog/container-security-ignoring#the-pattern" class="hash-link" aria-label="Direct link to The Pattern" title="Direct link to The Pattern">​</a></h2>
+<p>All 5 of these share one thing: they're easy to skip when you're "just getting it working." But production security isn't about making it work — it's about making it safe. And the gap between those two is where incidents happen.</p>
+<hr>
+<p><em>Which of these is most commonly missed in your experience? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Let me know on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Kubernetes" term="Kubernetes"/>
+        <category label="Cloud Security" term="Cloud Security"/>
+        <category label="Containers" term="Containers"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[From Monolith to Microservices: A Platform Engineer's Honest Take]]></title>
+        <id>https://saikoushikg.in/blog/monolith-to-microservices-platform-perspective</id>
+        <link href="https://saikoushikg.in/blog/monolith-to-microservices-platform-perspective"/>
+        <updated>2026-02-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["We're moving to microservices."]]></summary>
+        <content type="html"><![CDATA[<p>"We're moving to microservices."</p>
+<p>Every time I hear this, my first question is: "Why?" And in about half the cases, the answer boils down to "because everyone else is."</p>
+<p>Here's what nobody in the microservices evangelism camp tells you: <strong>you need a platform to make microservices work.</strong> Without one, you're trading one set of problems for a worse set.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-the-monolith-actually-gave-you">What the Monolith Actually Gave You<a href="https://saikoushikg.in/blog/monolith-to-microservices-platform-perspective#what-the-monolith-actually-gave-you" class="hash-link" aria-label="Direct link to What the Monolith Actually Gave You" title="Direct link to What the Monolith Actually Gave You">​</a></h2>
+<ul>
+<li><strong>One deployment process</strong> — simple, repeatable, understood</li>
+<li><strong>One database</strong> — joins are easy, transactions are ACID</li>
+<li><strong>One codebase</strong> — grep works, debugging is straightforward</li>
+<li><strong>One team</strong> — everyone understands the whole system</li>
+</ul>
+<p>That's not technical debt. That's simplicity. And simplicity has enormous value.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-microservices-actually-demand">What Microservices Actually Demand<a href="https://saikoushikg.in/blog/monolith-to-microservices-platform-perspective#what-microservices-actually-demand" class="hash-link" aria-label="Direct link to What Microservices Actually Demand" title="Direct link to What Microservices Actually Demand">​</a></h2>
+<p>For each service you extract, you now need:</p>
+<ul>
+<li>Its own CI/CD pipeline</li>
+<li>Its own deployment configuration</li>
+<li>Service discovery and load balancing</li>
+<li>Inter-service authentication</li>
+<li>Distributed tracing (because debugging across 15 services with <code>console.log</code> doesn't work)</li>
+<li>A strategy for data consistency across services</li>
+</ul>
+<p><strong>Multiply that by 20 services.</strong> That's not an application problem anymore — it's an infrastructure problem. It's a platform problem.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="when-microservices-make-sense">When Microservices Make Sense<a href="https://saikoushikg.in/blog/monolith-to-microservices-platform-perspective#when-microservices-make-sense" class="hash-link" aria-label="Direct link to When Microservices Make Sense" title="Direct link to When Microservices Make Sense">​</a></h2>
+<ol>
+<li><strong>Independent scaling</strong> — one component needs 10x the compute of others</li>
+<li><strong>Independent deployment</strong> — teams are blocked waiting for each other's releases</li>
+<li><strong>Independent technology</strong> — one component genuinely needs a different language/runtime</li>
+<li><strong>Organisational structure</strong> — you have autonomous teams that own distinct business domains</li>
+</ol>
+<p>If none of these apply, you probably don't need microservices. You need a well-structured monolith.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-platform-engineers-role">The Platform Engineer's Role<a href="https://saikoushikg.in/blog/monolith-to-microservices-platform-perspective#the-platform-engineers-role" class="hash-link" aria-label="Direct link to The Platform Engineer's Role" title="Direct link to The Platform Engineer's Role">​</a></h2>
+<p>If the organisation IS going to microservices (and they usually are, regardless of advice), the platform team's job is to make the operational complexity invisible:</p>
+<ul>
+<li><strong>Service templates</strong> — new service in minutes, not days</li>
+<li><strong>Shared observability</strong> — every service ships telemetry from day one</li>
+<li><strong>Standardised networking</strong> — service mesh or API gateway, managed centrally</li>
+<li><strong>Golden paths</strong> — the easy way IS the right way</li>
+</ul>
+<p>Without this, microservices become a distributed monolith — all the complexity, none of the benefits.</p>
+<hr>
+<p><em>Has your microservices migration actually delivered value? Honest answers only — <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">connect on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Platform Engineering" term="Platform Engineering"/>
+        <category label="Kubernetes" term="Kubernetes"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[GitOps Won't Save You If Your Git Hygiene Is Broken]]></title>
+        <id>https://saikoushikg.in/blog/gitops-wont-save-you</id>
+        <link href="https://saikoushikg.in/blog/gitops-wont-save-you"/>
+        <updated>2026-02-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[GitOps is elegant in theory: Git is the single source of truth, every change is auditable, infrastructure converges to the desired state automatically.]]></summary>
+        <content type="html"><![CDATA[<p>GitOps is elegant in theory: Git is the single source of truth, every change is auditable, infrastructure converges to the desired state automatically.</p>
+<p>In practice? If your Git hygiene is broken, GitOps just automates the chaos faster.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-promise-vs-reality">The Promise vs Reality<a href="https://saikoushikg.in/blog/gitops-wont-save-you#the-promise-vs-reality" class="hash-link" aria-label="Direct link to The Promise vs Reality" title="Direct link to The Promise vs Reality">​</a></h2>
+<p><strong>Promise</strong>: "We do GitOps — everything is version-controlled and auditable."</p>
+<p><strong>Reality</strong>: 47 open branches, merge conflicts in every PR, YAML files nobody understands, and a Flux/ArgoCD that's perpetually out of sync with manual hotfixes applied directly to the cluster.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-5-git-hygiene-rules-for-gitops">The 5 Git Hygiene Rules for GitOps<a href="https://saikoushikg.in/blog/gitops-wont-save-you#the-5-git-hygiene-rules-for-gitops" class="hash-link" aria-label="Direct link to The 5 Git Hygiene Rules for GitOps" title="Direct link to The 5 Git Hygiene Rules for GitOps">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-branch-protection-is-non-negotiable">1. Branch Protection Is Non-Negotiable<a href="https://saikoushikg.in/blog/gitops-wont-save-you#1-branch-protection-is-non-negotiable" class="hash-link" aria-label="Direct link to 1. Branch Protection Is Non-Negotiable" title="Direct link to 1. Branch Protection Is Non-Negotiable">​</a></h3>
+<p>Main branch requires PR reviews. No direct pushes. No force pushes. If your GitOps controller watches main, a broken push means a broken cluster.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-small-focused-commits">2. Small, Focused Commits<a href="https://saikoushikg.in/blog/gitops-wont-save-you#2-small-focused-commits" class="hash-link" aria-label="Direct link to 2. Small, Focused Commits" title="Direct link to 2. Small, Focused Commits">​</a></h3>
+<p>One change per commit. "Updated deployment, service, configmap, ingress, and added new namespace" is not one change — it's five. When something breaks, you need to know which change caused it.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-yaml-linting-in-ci">3. YAML Linting in CI<a href="https://saikoushikg.in/blog/gitops-wont-save-you#3-yaml-linting-in-ci" class="hash-link" aria-label="Direct link to 3. YAML Linting in CI" title="Direct link to 3. YAML Linting in CI">​</a></h3>
+<p>If malformed YAML reaches your main branch, your GitOps controller will fail silently or apply partial changes. Lint YAML in CI. Validate Kubernetes manifests with <code>kubeval</code> or <code>kubeconform</code>. Catch errors before they reach the cluster.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-meaningful-directory-structure">4. Meaningful Directory Structure<a href="https://saikoushikg.in/blog/gitops-wont-save-you#4-meaningful-directory-structure" class="hash-link" aria-label="Direct link to 4. Meaningful Directory Structure" title="Direct link to 4. Meaningful Directory Structure">​</a></h3>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">clusters/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── production/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   ├── namespaces/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   ├── workloads/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   └── policies/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── staging/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   └── ...</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">└── base/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    └── ... (shared resources)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Not: <code>k8s/stuff/</code>, <code>manifests/</code>, <code>deploy/</code>, <code>yaml-files/</code></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="5-drift-detection-alerts">5. Drift Detection Alerts<a href="https://saikoushikg.in/blog/gitops-wont-save-you#5-drift-detection-alerts" class="hash-link" aria-label="Direct link to 5. Drift Detection Alerts" title="Direct link to 5. Drift Detection Alerts">​</a></h3>
+<p>If someone <code>kubectl apply</code>s directly to the cluster (and they will), your GitOps tool should detect the drift and alert. Configure ArgoCD or Flux to report on resources that don't match the Git state.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-uncomfortable-truth">The Uncomfortable Truth<a href="https://saikoushikg.in/blog/gitops-wont-save-you#the-uncomfortable-truth" class="hash-link" aria-label="Direct link to The Uncomfortable Truth" title="Direct link to The Uncomfortable Truth">​</a></h2>
+<p>GitOps is a workflow, not a tool. Installing ArgoCD doesn't give you GitOps any more than installing Jira gives you Agile. The discipline has to come first.</p>
+<hr>
+<p><em>What's your biggest GitOps challenge? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Let's troubleshoot together on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="DevOps" term="DevOps"/>
+        <category label="Kubernetes" term="Kubernetes"/>
+        <category label="CI/CD" term="CI/CD"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Azure Policy vs Azure RBAC: When to Use What]]></title>
+        <id>https://saikoushikg.in/blog/azure-policy-vs-rbac</id>
+        <link href="https://saikoushikg.in/blog/azure-policy-vs-rbac"/>
+        <updated>2026-02-19T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Two of the most powerful governance tools in Azure, and two of the most confused. I've seen teams use RBAC when they need Policy, and Policy when they need RBAC. Here's the clear distinction.]]></summary>
+        <content type="html"><![CDATA[<p>Two of the most powerful governance tools in Azure, and two of the most confused. I've seen teams use RBAC when they need Policy, and Policy when they need RBAC. Here's the clear distinction.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-one-line-difference">The One-Line Difference<a href="https://saikoushikg.in/blog/azure-policy-vs-rbac#the-one-line-difference" class="hash-link" aria-label="Direct link to The One-Line Difference" title="Direct link to The One-Line Difference">​</a></h2>
+<ul>
+<li><strong>RBAC</strong> = WHO can do WHAT (identity → action)</li>
+<li><strong>Policy</strong> = WHAT can be done, regardless of who (action → rules)</li>
+</ul>
+<p>A Contributor role (RBAC) lets you create any VM. A Policy can restrict you to only creating VMs in UK South with specific SKUs and mandatory tags — even if RBAC says you CAN create VMs.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="when-to-use-rbac">When to Use RBAC<a href="https://saikoushikg.in/blog/azure-policy-vs-rbac#when-to-use-rbac" class="hash-link" aria-label="Direct link to When to Use RBAC" title="Direct link to When to Use RBAC">​</a></h2>
+<table><thead><tr><th>Scenario</th><th>RBAC Role</th></tr></thead><tbody><tr><td>Dev team needs to deploy to their resource group</td><td>Contributor (scoped to RG)</td></tr><tr><td>Security team needs read access everywhere</td><td>Reader (scoped to subscription)</td></tr><tr><td>Platform team needs to manage all networking</td><td>Network Contributor (scoped to networking RG)</td></tr><tr><td>CI/CD pipeline needs to deploy</td><td>Contributor with conditions</td></tr></tbody></table>
+<p><strong>Rule of thumb</strong>: If the question is "should this person/service be ALLOWED to do this action?" → RBAC.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="when-to-use-azure-policy">When to Use Azure Policy<a href="https://saikoushikg.in/blog/azure-policy-vs-rbac#when-to-use-azure-policy" class="hash-link" aria-label="Direct link to When to Use Azure Policy" title="Direct link to When to Use Azure Policy">​</a></h2>
+<table><thead><tr><th>Scenario</th><th>Policy</th></tr></thead><tbody><tr><td>All resources must have a cost-centre tag</td><td>Require tag (Deny)</td></tr><tr><td>VMs can only be created in UK South and UK West</td><td>Allowed locations (Deny)</td></tr><tr><td>Storage accounts must use HTTPS</td><td>Enforce HTTPS (Deny)</td></tr><tr><td>All subnets must have an NSG</td><td>Audit NSG association (Audit)</td></tr></tbody></table>
+<p><strong>Rule of thumb</strong>: If the question is "should this CONFIGURATION be allowed in our environment?" → Policy.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-power-combo">The Power Combo<a href="https://saikoushikg.in/blog/azure-policy-vs-rbac#the-power-combo" class="hash-link" aria-label="Direct link to The Power Combo" title="Direct link to The Power Combo">​</a></h2>
+<p>The real magic is using them together:</p>
+<ol>
+<li><strong>RBAC</strong>: Dev team gets Contributor on their resource group</li>
+<li><strong>Policy at subscription level</strong>: No public IPs, mandatory tags, allowed regions only, approved SKUs only</li>
+<li><strong>Result</strong>: Teams have freedom to build, but within guardrails</li>
+</ol>
+<p>This is the foundation of a landing zone. RBAC gives autonomy. Policy gives governance. Together, they give you <strong>secure self-service</strong>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="common-mistakes">Common Mistakes<a href="https://saikoushikg.in/blog/azure-policy-vs-rbac#common-mistakes" class="hash-link" aria-label="Direct link to Common Mistakes" title="Direct link to Common Mistakes">​</a></h2>
+<ul>
+<li>Using custom RBAC roles to restrict resource types → Use Policy instead</li>
+<li>Using Policy to control who can deploy → Use RBAC instead</li>
+<li>Applying policies in "Deny" mode without testing in "Audit" first → Guaranteed production incident</li>
+<li>Creating overly broad RBAC assignments → Principle of least privilege, always</li>
+</ul>
+<hr>
+<p><em>How do you combine RBAC and Policy in your environment? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Share your approach on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Azure" term="Azure"/>
+        <category label="Cloud Security" term="Cloud Security"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[The Developer Experience Gap Nobody Talks About]]></title>
+        <id>https://saikoushikg.in/blog/developer-experience-gap</id>
+        <link href="https://saikoushikg.in/blog/developer-experience-gap"/>
+        <updated>2026-02-16T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[We spend millions on developer tooling — IDEs, CI/CD, cloud platforms, monitoring. Yet in most organisations, the developer experience is still frustrating.]]></summary>
+        <content type="html"><![CDATA[<p>We spend millions on developer tooling — IDEs, CI/CD, cloud platforms, monitoring. Yet in most organisations, the developer experience is still frustrating.</p>
+<p>The gap isn't in the tools. It's in the space BETWEEN the tools.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-journey-nobody-maps">The Journey Nobody Maps<a href="https://saikoushikg.in/blog/developer-experience-gap#the-journey-nobody-maps" class="hash-link" aria-label="Direct link to The Journey Nobody Maps" title="Direct link to The Journey Nobody Maps">​</a></h2>
+<p>Picture a new developer joining your team:</p>
+<ol>
+<li>
+<p><strong>Day 1</strong>: Get laptop, install tools. Which tools? Check the wiki. The wiki is outdated. Ask Slack. Three people give three different answers.</p>
+</li>
+<li>
+<p><strong>Day 3</strong>: Clone the repo. Try to run locally. Missing environment variables. Missing dependencies. The README says "run <code>make setup</code>" — the Makefile hasn't worked since 2024.</p>
+</li>
+<li>
+<p><strong>Day 7</strong>: First PR submitted. CI fails. Linting rules not documented. Tests pass locally but fail in CI because CI uses a different Node version.</p>
+</li>
+<li>
+<p><strong>Day 14</strong>: Finally deployable. But how? "Talk to DevOps." DevOps points to a Confluence page. The page references a pipeline that's been replaced.</p>
+</li>
+</ol>
+<p><strong>Two weeks to deploy a one-line change.</strong> That's not a tooling problem. That's a developer experience problem.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-good-looks-like">What Good Looks Like<a href="https://saikoushikg.in/blog/developer-experience-gap#what-good-looks-like" class="hash-link" aria-label="Direct link to What Good Looks Like" title="Direct link to What Good Looks Like">​</a></h2>
+<p>The best platform teams I've worked with treat developer experience like a product:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="onboarding-in-hours-not-weeks">Onboarding in Hours, Not Weeks<a href="https://saikoushikg.in/blog/developer-experience-gap#onboarding-in-hours-not-weeks" class="hash-link" aria-label="Direct link to Onboarding in Hours, Not Weeks" title="Direct link to Onboarding in Hours, Not Weeks">​</a></h3>
+<ul>
+<li>One-command local setup: <code>make dev-setup</code></li>
+<li>Pre-configured dev containers with all dependencies</li>
+<li>Up-to-date documentation (enforced by automation, not hope)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="inner-loop-speed">Inner Loop Speed<a href="https://saikoushikg.in/blog/developer-experience-gap#inner-loop-speed" class="hash-link" aria-label="Direct link to Inner Loop Speed" title="Direct link to Inner Loop Speed">​</a></h3>
+<ul>
+<li>Local development mirrors production closely</li>
+<li>Hot reload, fast feedback, clear error messages</li>
+<li>Tests run in under 5 minutes</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="outer-loop-clarity">Outer Loop Clarity<a href="https://saikoushikg.in/blog/developer-experience-gap#outer-loop-clarity" class="hash-link" aria-label="Direct link to Outer Loop Clarity" title="Direct link to Outer Loop Clarity">​</a></h3>
+<ul>
+<li>One way to deploy (the golden path)</li>
+<li>Self-service environments</li>
+<li>Clear status: where is my change right now?</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-to-measure-it">How to Measure It<a href="https://saikoushikg.in/blog/developer-experience-gap#how-to-measure-it" class="hash-link" aria-label="Direct link to How to Measure It" title="Direct link to How to Measure It">​</a></h2>
+<p>Track these:</p>
+<ul>
+<li><strong>Time to first commit</strong> — how long from laptop to merged PR?</li>
+<li><strong>Deployment frequency</strong> — are teams deploying daily or weekly?</li>
+<li><strong>Time to recovery</strong> — when something breaks, how fast do they fix it?</li>
+<li><strong>Developer satisfaction</strong> — quarterly survey, 5 questions, anonymous</li>
+</ul>
+<p>If you're not measuring developer experience, you're not managing it.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-business-case">The Business Case<a href="https://saikoushikg.in/blog/developer-experience-gap#the-business-case" class="hash-link" aria-label="Direct link to The Business Case" title="Direct link to The Business Case">​</a></h2>
+<p>Every hour a developer spends fighting tooling is an hour not spent building features. At £80-120/hour for an engineer, a platform that saves 2 hours per developer per week across 100 developers saves £800K-1.2M per year.</p>
+<p>That's not a cost centre. That's an investment with measurable returns.</p>
+<hr>
+<p><em>What's the most frustrating part of your developer experience? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Tell me on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Platform Engineering" term="Platform Engineering"/>
+        <category label="DevOps" term="DevOps"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Observability Is Not Monitoring — Here's the Difference That Matters]]></title>
+        <id>https://saikoushikg.in/blog/observability-is-not-monitoring</id>
+        <link href="https://saikoushikg.in/blog/observability-is-not-monitoring"/>
+        <updated>2026-02-13T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["We have observability — we use Grafana dashboards."]]></summary>
+        <content type="html"><![CDATA[<p>"We have observability — we use Grafana dashboards."</p>
+<p>No. You have monitoring. And there's a critical difference that most teams miss until their first major incident.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="monitoring-vs-observability">Monitoring vs Observability<a href="https://saikoushikg.in/blog/observability-is-not-monitoring#monitoring-vs-observability" class="hash-link" aria-label="Direct link to Monitoring vs Observability" title="Direct link to Monitoring vs Observability">​</a></h2>
+<p><strong>Monitoring</strong> answers: "Is this thing working?"</p>
+<ul>
+<li>CPU at 80%? Alert.</li>
+<li>Response time &gt; 2s? Alert.</li>
+<li>Error rate &gt; 1%? Alert.</li>
+</ul>
+<p><strong>Observability</strong> answers: "WHY is this thing broken?"</p>
+<ul>
+<li>Which specific requests are slow?</li>
+<li>What changed between yesterday (working) and today (broken)?</li>
+<li>Which downstream dependency is causing the cascade?</li>
+</ul>
+<p>Monitoring tells you there's a fire. Observability helps you find the room it's in.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-three-pillars-and-why-theyre-not-enough">The Three Pillars (And Why They're Not Enough)<a href="https://saikoushikg.in/blog/observability-is-not-monitoring#the-three-pillars-and-why-theyre-not-enough" class="hash-link" aria-label="Direct link to The Three Pillars (And Why They're Not Enough)" title="Direct link to The Three Pillars (And Why They're Not Enough)">​</a></h2>
+<p>You've heard it: Logs, Metrics, Traces. The three pillars. But having all three doesn't automatically give you observability.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="logs-without-structure--noise">Logs Without Structure = Noise<a href="https://saikoushikg.in/blog/observability-is-not-monitoring#logs-without-structure--noise" class="hash-link" aria-label="Direct link to Logs Without Structure = Noise" title="Direct link to Logs Without Structure = Noise">​</a></h3>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">INFO: Processing request</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">ERROR: Something went wrong</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>vs</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token punctuation" style="color:rgb(248, 248, 242)">{</span><span class="token property">"level"</span><span class="token operator">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"error"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token property">"service"</span><span class="token operator">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"payment-api"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token property">"trace_id"</span><span class="token operator">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"abc123"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token property">"user_id"</span><span class="token operator">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"u456"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token property">"error"</span><span class="token operator">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(255, 121, 198)">"timeout calling inventory-service"</span><span class="token punctuation" style="color:rgb(248, 248, 242)">,</span><span class="token plain"> </span><span class="token property">"latency_ms"</span><span class="token operator">:</span><span class="token plain"> </span><span class="token number">5002</span><span class="token punctuation" style="color:rgb(248, 248, 242)">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Structured logs with correlation IDs. That's the difference between searchable context and a wall of text.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="metrics-without-cardinality--blind-spots">Metrics Without Cardinality = Blind Spots<a href="https://saikoushikg.in/blog/observability-is-not-monitoring#metrics-without-cardinality--blind-spots" class="hash-link" aria-label="Direct link to Metrics Without Cardinality = Blind Spots" title="Direct link to Metrics Without Cardinality = Blind Spots">​</a></h3>
+<p>Average response time: 200ms. Looks fine. But P99 is 8 seconds. 1% of your users are having a terrible experience and your dashboard says everything's green.</p>
+<p><strong>Always track</strong>: P50, P95, P99. Averages lie.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="traces-without-propagation--fragments">Traces Without Propagation = Fragments<a href="https://saikoushikg.in/blog/observability-is-not-monitoring#traces-without-propagation--fragments" class="hash-link" aria-label="Direct link to Traces Without Propagation = Fragments" title="Direct link to Traces Without Propagation = Fragments">​</a></h3>
+<p>A trace that covers one service but stops at the boundary is useless for debugging distributed issues. Context propagation across every service boundary is essential.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-i-set-up-for-every-platform">What I Set Up for Every Platform<a href="https://saikoushikg.in/blog/observability-is-not-monitoring#what-i-set-up-for-every-platform" class="hash-link" aria-label="Direct link to What I Set Up for Every Platform" title="Direct link to What I Set Up for Every Platform">​</a></h2>
+<ol>
+<li><strong>OpenTelemetry SDK</strong> baked into every service template — not optional</li>
+<li><strong>Structured logging</strong> with mandatory fields: trace_id, service, environment</li>
+<li><strong>RED metrics</strong> for every service: Rate, Errors, Duration</li>
+<li><strong>Alerting on symptoms</strong> (error rate, latency) not causes (CPU, memory)</li>
+<li><strong>Runbooks linked to alerts</strong> — every alert has a "what to do" document</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-culture-part">The Culture Part<a href="https://saikoushikg.in/blog/observability-is-not-monitoring#the-culture-part" class="hash-link" aria-label="Direct link to The Culture Part" title="Direct link to The Culture Part">​</a></h2>
+<p>The best observability setup is useless if engineers don't use it. Make it part of the development workflow: "Before you merge, can you trace a request through your change?"</p>
+<hr>
+<p><em>How mature is your team's observability practice? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Let's discuss on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="DevOps" term="DevOps"/>
+        <category label="Observability" term="Observability"/>
+        <category label="SRE" term="SRE"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Why Every Platform Team Needs a Service Catalogue]]></title>
+        <id>https://saikoushikg.in/blog/every-platform-team-needs-service-catalogue</id>
+        <link href="https://saikoushikg.in/blog/every-platform-team-needs-service-catalogue"/>
+        <updated>2026-02-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["Who owns this service?"]]></summary>
+        <content type="html"><![CDATA[<p>"Who owns this service?"</p>
+<p>If answering that question requires Slack messages, tribal knowledge, or archaeology through Git blame — you need a service catalogue.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-problem-at-scale">The Problem at Scale<a href="https://saikoushikg.in/blog/every-platform-team-needs-service-catalogue#the-problem-at-scale" class="hash-link" aria-label="Direct link to The Problem at Scale" title="Direct link to The Problem at Scale">​</a></h2>
+<p>At 10 services, everyone knows who owns what. At 50, it gets fuzzy. At 200+, it's chaos.</p>
+<p>Questions that should take 5 seconds:</p>
+<ul>
+<li>Who owns the payment-api?</li>
+<li>What does the inventory-service depend on?</li>
+<li>When was the last deployment to auth-service?</li>
+<li>Is this service compliant with our security policies?</li>
+</ul>
+<p>Without a catalogue, each answer requires a Slack thread, a meeting, or guessing.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-goes-in-a-service-catalogue">What Goes in a Service Catalogue<a href="https://saikoushikg.in/blog/every-platform-team-needs-service-catalogue#what-goes-in-a-service-catalogue" class="hash-link" aria-label="Direct link to What Goes in a Service Catalogue" title="Direct link to What Goes in a Service Catalogue">​</a></h2>
+<p>At minimum:</p>
+<table><thead><tr><th>Field</th><th>Example</th></tr></thead><tbody><tr><td>Service name</td><td>payment-api</td></tr><tr><td>Owner (team)</td><td>Payments Squad</td></tr><tr><td>Tech stack</td><td>Node.js, PostgreSQL</td></tr><tr><td>Repository</td><td>github.com/org/payment-api</td></tr><tr><td>Runbook</td><td>confluence.org/payment-api-runbook</td></tr><tr><td>Dependencies</td><td>auth-service, inventory-service</td></tr><tr><td>SLA/SLO</td><td>99.9% availability, P95 &lt; 500ms</td></tr><tr><td>Last deploy</td><td>2026-03-15 14:32</td></tr><tr><td>Security tier</td><td>Tier 1 (PCI)</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tools-that-work">Tools That Work<a href="https://saikoushikg.in/blog/every-platform-team-needs-service-catalogue#tools-that-work" class="hash-link" aria-label="Direct link to Tools That Work" title="Direct link to Tools That Work">​</a></h2>
+<ul>
+<li><strong>Backstage</strong> (Spotify) — the most popular. Extensible. Plugin ecosystem. Steep initial setup but worth it at scale.</li>
+<li><strong>Port</strong> — SaaS alternative. Faster to set up. Less customisable.</li>
+<li><strong>OpsLevel</strong> — Good for maturity scoring.</li>
+<li><strong>Custom</strong> — A Git repo with YAML files per service. Surprisingly effective for smaller orgs.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-backstage-approach">The Backstage Approach<a href="https://saikoushikg.in/blog/every-platform-team-needs-service-catalogue#the-backstage-approach" class="hash-link" aria-label="Direct link to The Backstage Approach" title="Direct link to The Backstage Approach">​</a></h2>
+<p>We implemented Backstage with a simple rule: <strong>every new service must have a <code>catalog-info.yaml</code> in its root</strong>. No file, no deployment pipeline.</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token key atrule">apiVersion</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> backstage.io/v1alpha1</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">kind</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> Component</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">metadata</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">name</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> payment</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">api</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">description</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> Handles payment processing</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">annotations</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token key atrule">github.com/project-slug</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> org/payment</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">api</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain"></span><span class="token key atrule">spec</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">type</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> service</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">lifecycle</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> production</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">owner</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"> payments</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">squad</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  </span><span class="token key atrule">dependsOn</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> component</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain">auth</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">service</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    </span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain"> resource</span><span class="token punctuation" style="color:rgb(248, 248, 242)">:</span><span class="token plain">payments</span><span class="token punctuation" style="color:rgb(248, 248, 242)">-</span><span class="token plain">db</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Within 3 months, we had 100% coverage. Not because teams loved filling in YAML — because they couldn't deploy without it.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-real-value">The Real Value<a href="https://saikoushikg.in/blog/every-platform-team-needs-service-catalogue#the-real-value" class="hash-link" aria-label="Direct link to The Real Value" title="Direct link to The Real Value">​</a></h2>
+<p>A service catalogue isn't about documentation. It's about <strong>making the invisible visible</strong>. During incidents, it turns "who owns this?" from a 20-minute Slack hunt into a 5-second lookup. That speed saves real money and real stress.</p>
+<hr>
+<p><em>Does your org have a service catalogue? What tool did you pick? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Let me know on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Platform Engineering" term="Platform Engineering"/>
+        <category label="DevOps" term="DevOps"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Terraform State Management: Lessons Learned the Hard Way]]></title>
+        <id>https://saikoushikg.in/blog/terraform-state-management-lessons</id>
+        <link href="https://saikoushikg.in/blog/terraform-state-management-lessons"/>
+        <updated>2026-02-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Terraform state is both the most important and most dangerous file in your infrastructure. It's the source of truth for what Terraform manages. Lose it, corrupt it, or let two people modify it simultaneously, and you're in for a very bad day.]]></summary>
+        <content type="html"><![CDATA[<p>Terraform state is both the most important and most dangerous file in your infrastructure. It's the source of truth for what Terraform manages. Lose it, corrupt it, or let two people modify it simultaneously, and you're in for a very bad day.</p>
+<p>Here are the lessons I learned — some of them the hard way.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="lesson-1-remote-state-from-day-one">Lesson 1: Remote State from Day One<a href="https://saikoushikg.in/blog/terraform-state-management-lessons#lesson-1-remote-state-from-day-one" class="hash-link" aria-label="Direct link to Lesson 1: Remote State from Day One" title="Direct link to Lesson 1: Remote State from Day One">​</a></h2>
+<p>Local state files work for tutorials. For anything else, use remote state.</p>
+<div class="language-hcl codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-hcl codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">terraform {</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  backend "azurerm" {</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    resource_group_name  = "rg-terraform-state"</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    storage_account_name = "stterraformstate"</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    container_name       = "tfstate"</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    key                  = "networking/terraform.tfstate"</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  }</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>Not tomorrow. Not "when we set up the proper backend." Day one.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="lesson-2-state-locking-prevents-disasters">Lesson 2: State Locking Prevents Disasters<a href="https://saikoushikg.in/blog/terraform-state-management-lessons#lesson-2-state-locking-prevents-disasters" class="hash-link" aria-label="Direct link to Lesson 2: State Locking Prevents Disasters" title="Direct link to Lesson 2: State Locking Prevents Disasters">​</a></h2>
+<p>Two people run <code>terraform apply</code> at the same time. Both read the same state. Both try to create the same resource. Result: corrupted state, duplicated resources, and a weekend of cleanup.</p>
+<p>Azure Blob Storage with lease-based locking. DynamoDB for AWS. Turn it on and never think about it again.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="lesson-3-isolate-state-by-blast-radius">Lesson 3: Isolate State by Blast Radius<a href="https://saikoushikg.in/blog/terraform-state-management-lessons#lesson-3-isolate-state-by-blast-radius" class="hash-link" aria-label="Direct link to Lesson 3: Isolate State by Blast Radius" title="Direct link to Lesson 3: Isolate State by Blast Radius">​</a></h2>
+<p>One state file for everything = one mistake destroys everything.</p>
+<p><strong>What works</strong>: Separate state files by domain AND environment.</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">states/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── networking/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   ├── dev.tfstate</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   ├── staging.tfstate</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   └── prod.tfstate</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">├── compute/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   ├── dev.tfstate</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">│   └── prod.tfstate</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">└── database/</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    ├── dev.tfstate</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">    └── prod.tfstate</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>A bad plan in networking can't touch your databases. A dev experiment can't affect production.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="lesson-4-never-manually-edit-state">Lesson 4: Never Manually Edit State<a href="https://saikoushikg.in/blog/terraform-state-management-lessons#lesson-4-never-manually-edit-state" class="hash-link" aria-label="Direct link to Lesson 4: Never Manually Edit State" title="Direct link to Lesson 4: Never Manually Edit State">​</a></h2>
+<p><code>terraform state mv</code>, <code>terraform state rm</code>, <code>terraform import</code> — these are the only safe ways to modify state. Opening the JSON file and editing it directly is asking for corruption.</p>
+<p>The one exception: if state is already corrupted and the CLI tools can't help. Even then, take a backup first.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="lesson-5-state-backups-are-not-optional">Lesson 5: State Backups Are Not Optional<a href="https://saikoushikg.in/blog/terraform-state-management-lessons#lesson-5-state-backups-are-not-optional" class="hash-link" aria-label="Direct link to Lesson 5: State Backups Are Not Optional" title="Direct link to Lesson 5: State Backups Are Not Optional">​</a></h2>
+<p>Enable versioning on your state storage. Azure Blob versioning, S3 versioning — whatever your backend supports. When (not if) something goes wrong with state, the ability to roll back to a previous version is the difference between a 5-minute fix and a multi-day recovery.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-hard-won-summary">The Hard-Won Summary<a href="https://saikoushikg.in/blog/terraform-state-management-lessons#the-hard-won-summary" class="hash-link" aria-label="Direct link to The Hard-Won Summary" title="Direct link to The Hard-Won Summary">​</a></h2>
+<table><thead><tr><th>Rule</th><th>Why</th></tr></thead><tbody><tr><td>Remote state always</td><td>Collaboration + durability</td></tr><tr><td>State locking always</td><td>Prevent concurrent corruption</td></tr><tr><td>Isolate by blast radius</td><td>Limit damage from mistakes</td></tr><tr><td>Never edit state manually</td><td>CLI tools or nothing</td></tr><tr><td>Version your state storage</td><td>Rollback capability</td></tr></tbody></table>
+<hr>
+<p><em>What's your worst Terraform state horror story? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Share it on LinkedIn</a> — misery loves company.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Terraform" term="Terraform"/>
+        <category label="Infrastructure as Code" term="Infrastructure as Code"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[The Myth of the 10x Engineer in Platform Engineering]]></title>
+        <id>https://saikoushikg.in/blog/myth-of-10x-engineer-platform</id>
+        <link href="https://saikoushikg.in/blog/myth-of-10x-engineer-platform"/>
+        <updated>2026-02-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The "10x engineer" myth is toxic in any discipline. In platform engineering, it's actively harmful.]]></summary>
+        <content type="html"><![CDATA[<p>The "10x engineer" myth is toxic in any discipline. In platform engineering, it's actively harmful.</p>
+<p>Platform engineering isn't about one brilliant person writing clever code. It's about making 100 engineers 10% more productive. That's a 10x impact — but it comes from systems, not heroics.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-heroes-hurt-platform-teams">Why Heroes Hurt Platform Teams<a href="https://saikoushikg.in/blog/myth-of-10x-engineer-platform#why-heroes-hurt-platform-teams" class="hash-link" aria-label="Direct link to Why Heroes Hurt Platform Teams" title="Direct link to Why Heroes Hurt Platform Teams">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-bus-factor-problem">The Bus Factor Problem<a href="https://saikoushikg.in/blog/myth-of-10x-engineer-platform#the-bus-factor-problem" class="hash-link" aria-label="Direct link to The Bus Factor Problem" title="Direct link to The Bus Factor Problem">​</a></h3>
+<p>If one person built the entire CI/CD system and only they understand it, you don't have a platform — you have a dependency. When they go on holiday, everything stalls. When they leave, you're rebuilding from scratch.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-complexity-trap">The Complexity Trap<a href="https://saikoushikg.in/blog/myth-of-10x-engineer-platform#the-complexity-trap" class="hash-link" aria-label="Direct link to The Complexity Trap" title="Direct link to The Complexity Trap">​</a></h3>
+<p>"Hero engineers" tend to build sophisticated, clever solutions. Clever solutions are hard to maintain, hard to debug, and hard to hand off. Platform engineering needs boring, predictable, well-documented systems.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-bottleneck-effect">The Bottleneck Effect<a href="https://saikoushikg.in/blog/myth-of-10x-engineer-platform#the-bottleneck-effect" class="hash-link" aria-label="Direct link to The Bottleneck Effect" title="Direct link to The Bottleneck Effect">​</a></h3>
+<p>When one person is the expert on everything, they become the bottleneck for every decision. PRs wait for their review. Incidents wait for their diagnosis. New features wait for their design. The team can't scale beyond one person's bandwidth.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-10x-actually-looks-like-in-platform-engineering">What 10x Actually Looks Like in Platform Engineering<a href="https://saikoushikg.in/blog/myth-of-10x-engineer-platform#what-10x-actually-looks-like-in-platform-engineering" class="hash-link" aria-label="Direct link to What 10x Actually Looks Like in Platform Engineering" title="Direct link to What 10x Actually Looks Like in Platform Engineering">​</a></h2>
+<p>A truly impactful platform engineer doesn't write 10x more code. They:</p>
+<ol>
+<li><strong>Reduce toil for everyone</strong> — automate the repetitive tasks that 100 engineers do daily</li>
+<li><strong>Write documentation that scales</strong> — their knowledge doesn't live in their head</li>
+<li><strong>Build simple systems</strong> — that any team member can understand, maintain, and extend</li>
+<li><strong>Mentor actively</strong> — growing 5 engineers from 1x to 3x each creates more impact than any solo contribution</li>
+<li><strong>Say no to complexity</strong> — the hardest skill, refusing to over-engineer</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-team-metric">The Team Metric<a href="https://saikoushikg.in/blog/myth-of-10x-engineer-platform#the-team-metric" class="hash-link" aria-label="Direct link to The Team Metric" title="Direct link to The Team Metric">​</a></h2>
+<p>Instead of celebrating individual heroics, measure team outcomes:</p>
+<ul>
+<li>How many developer hours did the platform save this quarter?</li>
+<li>How many teams are self-serving without platform team involvement?</li>
+<li>What's the platform team's own bus factor? (If it's 1, that's a problem)</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-hiring-implication">The Hiring Implication<a href="https://saikoushikg.in/blog/myth-of-10x-engineer-platform#the-hiring-implication" class="hash-link" aria-label="Direct link to The Hiring Implication" title="Direct link to The Hiring Implication">​</a></h2>
+<p>When hiring for platform teams, don't look for the smartest person in the room. Look for the person who makes everyone else smarter. Clear communicators. Patient teachers. People who delete code more than they write it.</p>
+<hr>
+<p><em>Do you agree? Is the 10x myth harmful or is there truth to it? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Debate me on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Platform Engineering" term="Platform Engineering"/>
+        <category label="Career" term="Career"/>
+        <category label="Leadership" term="Leadership"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Azure Kubernetes Service vs Self-Managed: An Honest Comparison]]></title>
+        <id>https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes</id>
+        <link href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes"/>
+        <updated>2026-02-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA["Should we use AKS or run our own Kubernetes?"]]></summary>
+        <content type="html"><![CDATA[<p>"Should we use AKS or run our own Kubernetes?"</p>
+<p>I've had this conversation at least a dozen times. The answer is almost always AKS — but there are legitimate reasons for self-managed. Here's the honest comparison from someone who's run both.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="where-aks-wins-decisively">Where AKS Wins Decisively<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#where-aks-wins-decisively" class="hash-link" aria-label="Direct link to Where AKS Wins Decisively" title="Direct link to Where AKS Wins Decisively">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="control-plane-management">Control Plane Management<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#control-plane-management" class="hash-link" aria-label="Direct link to Control Plane Management" title="Direct link to Control Plane Management">​</a></h3>
+<p>AKS gives you a free, managed control plane. Self-managed means you're responsible for etcd backups, API server availability, controller manager health, and Kubernetes upgrades. That's a full-time job for at least one engineer.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="upgrades">Upgrades<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#upgrades" class="hash-link" aria-label="Direct link to Upgrades" title="Direct link to Upgrades">​</a></h3>
+<p>AKS: click a button (or automate it). Self-managed: weekend maintenance window, rollback plan, prayer.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="integration-with-azure">Integration with Azure<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#integration-with-azure" class="hash-link" aria-label="Direct link to Integration with Azure" title="Direct link to Integration with Azure">​</a></h3>
+<p>AAD integration, Azure Policy for Kubernetes, Azure Monitor for containers, Azure Key Vault CSI driver, managed identities — all native. Self-managed means building each integration yourself.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cost">Cost<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#cost" class="hash-link" aria-label="Direct link to Cost" title="Direct link to Cost">​</a></h3>
+<p>AKS control plane is free. You pay for the worker nodes. Self-managed means paying for control plane VMs on top of worker nodes. For most workloads, AKS is cheaper.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="where-self-managed-has-a-case">Where Self-Managed Has a Case<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#where-self-managed-has-a-case" class="hash-link" aria-label="Direct link to Where Self-Managed Has a Case" title="Direct link to Where Self-Managed Has a Case">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="extreme-customisation">Extreme Customisation<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#extreme-customisation" class="hash-link" aria-label="Direct link to Extreme Customisation" title="Direct link to Extreme Customisation">​</a></h3>
+<p>Need a specific Kubernetes version before AKS supports it? Custom admission controllers that conflict with AKS defaults? Unusual networking requirements? Self-managed gives you full control.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="multi-cloud-consistency">Multi-Cloud Consistency<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#multi-cloud-consistency" class="hash-link" aria-label="Direct link to Multi-Cloud Consistency" title="Direct link to Multi-Cloud Consistency">​</a></h3>
+<p>If you're running identical workloads on AWS, Azure, and GCP, a tool like Cluster API with a consistent self-managed setup across clouds might make sense. AKS is Azure-only.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="regulatory-requirements">Regulatory Requirements<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#regulatory-requirements" class="hash-link" aria-label="Direct link to Regulatory Requirements" title="Direct link to Regulatory Requirements">​</a></h3>
+<p>Some industries require full control over the control plane for compliance. If you must prove you control every component, self-managed is the only option.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="my-recommendation">My Recommendation<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#my-recommendation" class="hash-link" aria-label="Direct link to My Recommendation" title="Direct link to My Recommendation">​</a></h2>
+<table><thead><tr><th>Scenario</th><th>Choice</th></tr></thead><tbody><tr><td>Standard web workloads</td><td>AKS</td></tr><tr><td>Microservices platform</td><td>AKS</td></tr><tr><td>ML/AI workloads</td><td>AKS (with GPU node pools)</td></tr><tr><td>Multi-cloud identical setup</td><td>Self-managed (maybe)</td></tr><tr><td>Extreme compliance requirements</td><td>Self-managed</td></tr><tr><td>Small team (&lt; 5 engineers)</td><td>AKS (you can't afford the ops overhead)</td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-real-question">The Real Question<a href="https://saikoushikg.in/blog/aks-vs-self-managed-kubernetes#the-real-question" class="hash-link" aria-label="Direct link to The Real Question" title="Direct link to The Real Question">​</a></h2>
+<p>The question isn't really "AKS vs self-managed." It's "where do you want your engineers spending their time?" If operating Kubernetes is your competitive advantage, self-manage. For everyone else, let Microsoft handle the control plane and focus on what runs ON the cluster.</p>
+<hr>
+<p><em>What's your experience with managed vs self-managed Kubernetes? <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">Share your take on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Azure" term="Azure"/>
+        <category label="Kubernetes" term="Kubernetes"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[How to Onboard 90+ Teams Without Losing Your Mind]]></title>
+        <id>https://saikoushikg.in/blog/onboard-90-teams-without-losing-mind</id>
+        <link href="https://saikoushikg.in/blog/onboard-90-teams-without-losing-mind"/>
+        <updated>2026-01-28T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[In my current role, I've helped onboard over 90 engineering teams onto a shared platform. Not 90 developers — 90 TEAMS. Each with their own tech stack, their own expectations, and their own definition of "it should just work."]]></summary>
+        <content type="html"><![CDATA[<p>In my current role, I've helped onboard over 90 engineering teams onto a shared platform. Not 90 developers — 90 TEAMS. Each with their own tech stack, their own expectations, and their own definition of "it should just work."</p>
+<p>Here's what I learned about doing this at scale.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-mistake-treating-every-team-as-custom">The Mistake: Treating Every Team as Custom<a href="https://saikoushikg.in/blog/onboard-90-teams-without-losing-mind#the-mistake-treating-every-team-as-custom" class="hash-link" aria-label="Direct link to The Mistake: Treating Every Team as Custom" title="Direct link to The Mistake: Treating Every Team as Custom">​</a></h2>
+<p>When we started, each onboarding was bespoke. Platform engineer pairs with the team, understands their needs, configures their environment, walks them through the process. Beautiful. Personal. Completely unscalable.</p>
+<p>At team 15, we were drowning. Each onboarding took 2 weeks of platform engineer time. We had 3 platform engineers. The maths didn't work.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-fix-productise-the-onboarding">The Fix: Productise the Onboarding<a href="https://saikoushikg.in/blog/onboard-90-teams-without-losing-mind#the-fix-productise-the-onboarding" class="hash-link" aria-label="Direct link to The Fix: Productise the Onboarding" title="Direct link to The Fix: Productise the Onboarding">​</a></h2>
+<p>We treated onboarding like a product launch:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-self-service-portal">1. Self-Service Portal<a href="https://saikoushikg.in/blog/onboard-90-teams-without-losing-mind#1-self-service-portal" class="hash-link" aria-label="Direct link to 1. Self-Service Portal" title="Direct link to 1. Self-Service Portal">​</a></h3>
+<p>Teams fill out a form: team name, tech stack, compliance tier, resource requirements. Behind the form, Terraform provisions everything: namespace, RBAC, CI/CD pipeline, monitoring dashboards, network policies.</p>
+<p><strong>Time to onboard: 30 minutes instead of 2 weeks.</strong></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-tiered-support">2. Tiered Support<a href="https://saikoushikg.in/blog/onboard-90-teams-without-losing-mind#2-tiered-support" class="hash-link" aria-label="Direct link to 2. Tiered Support" title="Direct link to 2. Tiered Support">​</a></h3>
+<ul>
+<li><strong>Tier 1 (self-service)</strong>: Documentation, FAQs, recorded walkthroughs</li>
+<li><strong>Tier 2 (Slack channel)</strong>: Platform team answers questions within 4 hours</li>
+<li><strong>Tier 3 (dedicated session)</strong>: Only for complex migrations, by appointment</li>
+</ul>
+<p>80% of teams never needed Tier 3.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-opinionated-defaults-escape-hatches">3. Opinionated Defaults, Escape Hatches<a href="https://saikoushikg.in/blog/onboard-90-teams-without-losing-mind#3-opinionated-defaults-escape-hatches" class="hash-link" aria-label="Direct link to 3. Opinionated Defaults, Escape Hatches" title="Direct link to 3. Opinionated Defaults, Escape Hatches">​</a></h3>
+<p>Every team gets the same base configuration. Same pipeline structure. Same monitoring setup. Same security policies. If they need something custom, there's a process — but the default works for 90% of cases.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-feedback-loops">4. Feedback Loops<a href="https://saikoushikg.in/blog/onboard-90-teams-without-losing-mind#4-feedback-loops" class="hash-link" aria-label="Direct link to 4. Feedback Loops" title="Direct link to 4. Feedback Loops">​</a></h3>
+<p>After every onboarding, a 3-question survey:</p>
+<ol>
+<li>How easy was it? (1-5)</li>
+<li>What was confusing?</li>
+<li>What would you change?</li>
+</ol>
+<p>We tracked the score monthly. Started at 3.2. Ended at 4.4. Every improvement came from team feedback, not our assumptions.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-key-insight">The Key Insight<a href="https://saikoushikg.in/blog/onboard-90-teams-without-losing-mind#the-key-insight" class="hash-link" aria-label="Direct link to The Key Insight" title="Direct link to The Key Insight">​</a></h2>
+<p>Platform engineering at scale is not infrastructure engineering. It's <strong>product management</strong>. Your users are developers. Your product is the platform. Treat it accordingly: measure satisfaction, iterate on feedback, and ruthlessly prioritise the common case.</p>
+<hr>
+<p><em>Scaling a platform team? I've been through the growing pains — <a href="https://linkedin.com/in/saikoushikg" target="_blank" rel="noopener noreferrer">let's talk on LinkedIn</a>.</em></p>]]></content>
+        <author>
+            <name>Saikoushik Gandikota</name>
+            <uri>https://linkedin.com/in/saikoushikg</uri>
+        </author>
+        <category label="Platform Engineering" term="Platform Engineering"/>
+        <category label="Leadership" term="Leadership"/>
+    </entry>
+</feed>
